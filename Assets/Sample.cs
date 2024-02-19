@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 namespace EmptyBraces
 {
@@ -8,12 +7,12 @@ namespace EmptyBraces
 
 		void Awake()
 		{
-			LocalizationManager.Load(Language);
+			Localization.LocalizationManager.Load(Language);
 		}
 
 		public void OnLoadLanguage(SystemLanguage lan)
 		{
-			LocalizationManager.Load(Language);
+			Localization.LocalizationManager.Load(Language);
 			foreach (var i in FindObjectsByType<Localization.TMProLocalize>(FindObjectsSortMode.None))
 				i.RefreshText();
 		}

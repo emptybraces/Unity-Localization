@@ -237,10 +237,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\u653B\u51FB\u529B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2a9b1851ff6587847a15273c04709d4a, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 440320edf4d54b34e81fc72c9443130e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ee01b68cf3d1e604b942012975d905c4, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 364250454f78cb44686b37f109ca72d3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

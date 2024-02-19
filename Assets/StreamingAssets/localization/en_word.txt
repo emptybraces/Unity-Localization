@@ -1,6 +1,8 @@
 //--------------------------------------------------------------------		
 // 共通		
 //--------------------------------------------------------------------		
+com/space1				
+com/space2
 com/yes					Yes
 com/no					No
 com/skip				Skip?
@@ -11,6 +13,6 @@ item/get				<b>Obtained {0}!</b>
 //--------------------------------------------------------------------		
 // ステータス
 //--------------------------------------------------------------------		
-status/params			<cspace=1em>ATK</cspace>
-						<cspace=1em>DEF</cspace>
-						<cspace=1em>MAG</cspace>
+status/params			<cspace=0.2em>ATK</cspace>
+						<cspace=0.2em>DEF</cspace>
+						<cspace=0.2em>MAG</cspace>

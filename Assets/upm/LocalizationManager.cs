@@ -1,16 +1,15 @@
 using System.Collections.Generic;
-using EmptyBraces.Localization;
+using System.IO;
 using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-namespace EmptyBraces
+namespace EmptyBraces.Localization
 {
 	public static class LocalizationManager
 	{
 		public static readonly string k_SettingsFileName = "LocalizationSettings";
-		public static readonly string ROOT_PATH = Application.streamingAssetsPath + "/localization";
 		public static string CurrentLoadedLaunguageId;
 		static Dictionary<string, AsyncOperationHandle<TMP_FontAsset>> _cacheAASHandles = new();
 		public static void Load(SystemLanguage language)
@@ -20,15 +19,15 @@ namespace EmptyBraces
 			if (CurrentLoadedLaunguageId == lan_id)
 				return;
 			bool failed = false;
-			var path = $"{ROOT_PATH}/{lan_id}_word.txt";
-			failed = failed || !Localization.Word.LoadFromFile(path);
+			var path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_id}_word.txt");
+			failed = failed || !Word.LoadFromFile(path);
 			if (failed)
 			{
 				lan_id = Settings.Instance.GetId(Application.systemLanguage);
 				cn.logwf(path, " file loading failed, retry with OS language. ", lan_id);
 				failed = false;
-				path = $"{ROOT_PATH}/{lan_id}_word.txt";
-				failed = failed || !Localization.Word.LoadFromFile(path);
+				path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_id}_word.txt");
+				failed = failed || !Word.LoadFromFile(path);
 				if (failed)
 				{
 					cn.logef(path, " file loading failed");
@@ -68,7 +67,6 @@ namespace EmptyBraces
 			cn.logf();
 			foreach (var i in _cacheAASHandles.Values)
 			{
-
 				Addressables.Release(i);
 			}
 			_cacheAASHandles.Clear();

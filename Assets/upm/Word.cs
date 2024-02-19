@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
 using System.IO;
 
 namespace EmptyBraces.Localization
@@ -42,28 +41,32 @@ namespace EmptyBraces.Localization
 			}
 			Data.Clear();
 			_tmpStringList.Clear();
-			var textData_span = textData.AsSpan();
+			var span_text = textData.AsSpan();
 			var s_idx = 0;
 			var line_no = 0;
 			string last_key = "";
-			while (s_idx < textData.Length)
+			while (s_idx < span_text.Length)
 			{
 				// セパレータで区切られた１カラムを探す
-				var e_idx = textData.IndexOf(Environment.NewLine, s_idx);
+				var e_idx = span_text.IndexOf(Environment.NewLine);
 				// 最後のカラムを処理するためにendIndexの操作
 				if (e_idx == -1)
-					e_idx = textData.Length;
+					e_idx = span_text.Length;
 				// 部分文字列をReadOnlySpan<char>で受け取る
-				var line = textData_span[s_idx..e_idx];
+				var line = span_text[s_idx..e_idx];
 				// 次のカラムを探すためs_idx更新
-				s_idx = e_idx + 2; /*改行コードは2charある様子*/
+				if (span_text.Length != e_idx)
+				{
+					span_text = span_text[(e_idx + Environment.NewLine.Length)..];
+				}
+				// s_idx = e_idx + 2; /*改行コードは2charある様子*/
 
 				++line_no;
-				if (line.StartsWith("//") || line.IsEmpty)
+				if (line.TrimStart().StartsWith("/") || line.IsEmpty)
 					continue;
 				// keyの検出
 				var key_idx = line.IndexOfAny('\t', ' ');
-				Assert.IsFalse(key_idx == -1);
+				// Assert.IsFalse(key_idx == -1);
 				// 先頭がタブまたは空白の場合は配列型
 				if (key_idx == 0)
 				{
@@ -76,16 +79,21 @@ namespace EmptyBraces.Localization
 					// 直前が配列終わりだった場合、配列を格納する
 					_AddWordArray(last_key, _tmpStringList);
 
-					var key = line[..key_idx];
+					// セパレータがないなら、キー＋空欄で登録する。
+					var key = key_idx == -1 ? line : line[..key_idx];
 					last_key = key.ToString();
 					// cn.logBlue(key_idx, last_key);
 
 					// valueの検出
-					var value_span = line[(key_idx + 1)..].Trim();
-					var value = value_span.ToString();
+					string value = ""; // セパレータがないなら、キー＋空欄で登録する。
+					if (key_idx != -1)
+					{
+						var value_span = key_idx == -1 ? "" : line[(key_idx + 1)..].Trim();
+						value = value_span.ToString();
+					}
 					// 格納
 					Data.Add(last_key, value);
-					cn.log("add | ", last_key, value);
+					cn.log($"Add | K={last_key}, V={value}");
 				}
 			}
 			// 直前が配列終わりだった場合、配列を格納する
@@ -96,8 +104,9 @@ namespace EmptyBraces.Localization
 		{
 			if (0 < values.Count)
 			{
-				values.Insert(0, (string)Data[lastKey]);
-				Data[lastKey] = values.ToArray();
+				values.Insert(0, (string)Data[lastKey]); // 先頭のキーを配列の先頭に設定する。
+				Data[lastKey] = values.ToArray(); // 上書きする。
+				cn.log($"AddArray | K={lastKey}, V={string.Join(",", values)}");
 				values.Clear();
 			}
 		}

@@ -1,8 +1,12 @@
+using System.IO;
 using UnityEngine;
 namespace EmptyBraces.Localization
 {
 	public class Settings : ScriptableObject
 	{
+		[SerializeField] string _localizeFileLocation = "localization";
+		public string LocalizeFileLocation => Path.Combine(Application.streamingAssetsPath, _localizeFileLocation);
+		public string SourceFileLocation = "";
 		public SystemLanguage DefaultLanguage = SystemLanguage.English;
 		public SupportLanguage[] SupportLanguages;
 		public static Settings Instance => _instance ??= Resources.Load<Settings>(LocalizationManager.k_SettingsFileName);
@@ -19,6 +23,13 @@ namespace EmptyBraces.Localization
 		{
 			foreach (var i in SupportLanguages)
 				if (i.Language == lan)
+					return i.Id;
+			return null;
+		}
+		public string GetDefaultLaunguageId()
+		{
+			foreach (var i in SupportLanguages)
+				if (i.Language == DefaultLanguage)
 					return i.Id;
 			return null;
 		}
