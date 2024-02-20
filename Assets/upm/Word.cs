@@ -42,18 +42,21 @@ namespace EmptyBraces.Localization
 			Data.Clear();
 			_tmpStringList.Clear();
 			var span_text = textData.AsSpan();
-			var s_idx = 0;
 			var line_no = 0;
 			string last_key = "";
-			while (s_idx < span_text.Length)
+			bool is_finish = false;
+			while (!is_finish)
 			{
 				// セパレータで区切られた１カラムを探す
 				var e_idx = span_text.IndexOf(Environment.NewLine);
 				// 最後のカラムを処理するためにendIndexの操作
 				if (e_idx == -1)
+				{
 					e_idx = span_text.Length;
+					is_finish = true;
+				}
 				// 部分文字列をReadOnlySpan<char>で受け取る
-				var line = span_text[s_idx..e_idx];
+				var line = span_text[..e_idx];
 				// 次のカラムを探すためs_idx更新
 				if (span_text.Length != e_idx)
 				{
@@ -62,7 +65,7 @@ namespace EmptyBraces.Localization
 				// s_idx = e_idx + 2; /*改行コードは2charある様子*/
 
 				++line_no;
-				if (line.TrimStart().StartsWith("/") || line.IsEmpty)
+				if (line.TrimStart().StartsWith("/", StringComparison.Ordinal) || line.IsEmpty)
 					continue;
 				// keyの検出
 				var key_idx = line.IndexOfAny('\t', ' ');
@@ -92,8 +95,8 @@ namespace EmptyBraces.Localization
 						value = value_span.ToString();
 					}
 					// 格納
-					Data.Add(last_key, value);
 					cn.log($"Add | K={last_key}, V={value}");
+					Data.Add(last_key, value);
 				}
 			}
 			// 直前が配列終わりだった場合、配列を格納する

@@ -16,37 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: b68737acf20556b40bd07ad407a08fb2
-  m_SerializeEntries:
-  - m_GUID: 0e5709f775994914996f0372f3d2273c
-    m_Address: font_default_en
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4b1dd579d9f490142b422edb04ff50cc
-    m_Address: font_serif_ja
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a77fdfc76a687ae42a60c53bd221295e
-    m_Address: font_serif_sc
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7de3f55bdf09df044addae5e584f834c
-    m_Address: font_default_sc
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 711e30ee8eee5d34ebdd61a4ba1a8e62
-    m_Address: font_default_ja
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0f66530c57d03a645918a1aba12f4516
-    m_Address: font_serif_en
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8baa4fcd78933614095db9c82786d5c3, type: 2}
   m_SchemaSet:

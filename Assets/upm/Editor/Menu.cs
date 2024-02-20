@@ -46,7 +46,7 @@ namespace EmptyBraces.Localization
 					var trimmed = line.Trim();
 					if (trimmed.Length < 3)
 						continue;
-					if (trimmed.StartsWith("/"))
+					if (trimmed.StartsWith("/", StringComparison.Ordinal))
 						continue;
 					var idx = trimmed.IndexOfAny(new char[] { '\t', ' ' });
 					if (idx == -1)
@@ -56,7 +56,7 @@ namespace EmptyBraces.Localization
 					}
 					var key = trimmed[..idx];
 					var var_name = key.Replace("/", "_");
-					sb.AppendLine($"public static readonly string {var_name} = \"{key}\";");
+					sb.AppendLine($"public const string {var_name} = \"{key}\";");
 				}
 				sb.AppendLine("}");
 				sb.AppendLine("}");
@@ -88,7 +88,7 @@ namespace EmptyBraces.Localization
 					{
 						foreach (var j in Settings.Instance.SupportLanguages)
 						{
-							if (i.EndsWith($"{j.Id}_word.txt"))
+							if (i.EndsWith($"{j.Id}_word.txt", StringComparison.Ordinal))
 							{
 								CreateLID();
 								break;

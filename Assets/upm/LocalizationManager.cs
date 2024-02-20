@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
@@ -9,10 +10,11 @@ namespace EmptyBraces.Localization
 {
 	public static class LocalizationManager
 	{
-		public static readonly string k_SettingsFileName = "LocalizationSettings";
+		public const string k_AddressablesGroupName = "Localization";
+		public const string k_SettingsFileName = "LocalizationSettings";
 		public static string CurrentLoadedLaunguageId;
-		static Dictionary<string, AsyncOperationHandle<TMP_FontAsset>> _cacheAASHandles = new();
-		public static void Load(SystemLanguage language)
+		static Dictionary<string, AsyncOperationHandle<IList<TMP_FontAsset>>> _cacheAASHandles = new();
+		public static void LoadWordFile(SystemLanguage language)
 		{
 			var lan_id = Settings.Instance.GetId(language);
 			Assert.IsNotNull(lan_id, "unsuported language: " + language);
@@ -37,38 +39,24 @@ namespace EmptyBraces.Localization
 			Release();
 			CurrentLoadedLaunguageId = lan_id;
 		}
-		public static TMP_FontAsset LoadIfNeeded(string fontName, string lanId = null)
+		public static TMP_FontAsset LoadFontAssetIfNeeded(string fontName, string lanId = null)
 		{
+			if (_cacheAASHandles.TryGetValue(fontName, out var op))
+				return op.Status == AsyncOperationStatus.Succeeded ? op.Result[0] : null;
 			lanId ??= CurrentLoadedLaunguageId;
-			var a_name = $"{fontName}_{lanId}";
-			if (_cacheAASHandles.TryGetValue(a_name, out var op))
-				return op.Status == AsyncOperationStatus.Succeeded ? op.Result : null;
-			cn.logf(a_name);
-			op = Addressables.LoadAssetAsync<TMP_FontAsset>(a_name);
-			_cacheAASHandles[a_name] = op;
-			op.WaitForCompletion();
-			return op.Status == AsyncOperationStatus.Succeeded ? op.Result : null;
+			cn.logf(fontName, lanId);
+			var handle = Addressables.LoadAssetsAsync<TMP_FontAsset>((IEnumerable)new object[] { fontName, lanId }, null, Addressables.MergeMode.Intersection);
+			_cacheAASHandles[fontName] = handle;
+			handle.WaitForCompletion();
+			return handle.Status == AsyncOperationStatus.Succeeded ? handle.Result[0] : null;
 		}
-		// public static Material LoadIfNeeded(string fontName, string lanId = null)
-		// {
-		// 	lanId ??= CurrentLoadedLaunguageId;
-		// 	var a_name = $"{fontName}_{lanId}";
-		// 	if (_cacheAASHandles.TryGetValue(a_name, out var op))
-		// 		return op.Status == AsyncOperationStatus.Succeeded ? op.Result : null;
-		// 	cn.logf(a_name);
-		// 	op = Addressables.LoadAssetAsync<TMP_FontAsset>(a_name);
-		// 	_cacheAASHandles[a_name] = op;
-		// 	op.WaitForCompletion();
-		// 	return op.Status == AsyncOperationStatus.Succeeded ? op.Result : null;
-		// }
 
 		public static void Release()
 		{
 			cn.logf();
 			foreach (var i in _cacheAASHandles.Values)
-			{
-				Addressables.Release(i);
-			}
+				if (i.IsValid())
+					Addressables.Release(i);
 			_cacheAASHandles.Clear();
 		}
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]

@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 namespace EmptyBraces.Localization.Editor
@@ -24,13 +24,17 @@ namespace EmptyBraces.Localization.Editor
 			var tmpro_localize = (TMProLocalize)target;
 			using (var h = new GUILayout.HorizontalScope())
 			{
-				_language = (SystemLanguage)EditorGUILayout.EnumPopup("Load Language", _language);
+				var displays = Settings.Instance.SupportLanguages.Select(e => e.Language).ToArray();
+				int idx = Mathf.Max(0, Array.IndexOf(displays, _language));
+				idx = EditorGUILayout.Popup(idx, displays.Select(e => e.ToString()).ToArray());
+				_language = displays[idx];
+				// _language = (SystemLanguage)EditorGUILayout.EnumPopup("Load Language", _language);
 				if (GUILayout.Button("Load"))
 				{
 					_Reset();
-					LocalizationManager.Load(_language);
+					LocalizationManager.LoadWordFile(_language);
 					tmpro_localize.RefreshText();
-					EditorApplication.QueuePlayerLoopUpdate();
+ 					EditorApplication.QueuePlayerLoopUpdate();
 				}
 			}
 			if (GUILayout.Button("Load Next Language"))
@@ -39,16 +43,10 @@ namespace EmptyBraces.Localization.Editor
 				var idx = Array.FindIndex(Settings.Instance.SupportLanguages, e => e.Language == _language);
 				idx = (int)Mathf.Repeat(idx + 1, Settings.Instance.SupportLanguages.Length);
 				_language = Settings.Instance.SupportLanguages[idx].Language;
-				LocalizationManager.Load(_language);
+				LocalizationManager.LoadWordFile(_language);
 				tmpro_localize.RefreshText();
 				EditorApplication.QueuePlayerLoopUpdate();
 			}
-			// if (GUILayout.Button("Set key to body"))
-			// {
-			// 	var c = (TMProLocalize)target;
-			// 	c.GetComponent<TMPro.TMP_Text>().text = c.Key;
-			// 	EditorApplication.QueuePlayerLoopUpdate();
-			// }
 			if (GUILayout.Button("Reset"))
 			{
 				_Reset();

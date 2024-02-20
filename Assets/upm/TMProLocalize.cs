@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 #if ODIN_INSPECTOR
 using Sirenix.OdinInspector;
@@ -11,17 +10,17 @@ namespace EmptyBraces.Localization
 	public class TMProLocalize : MonoBehaviour
 	{
 #if ODIN_INSPECTOR
-		[ValueDropdown("@Word.GetLocalizeKeyDropDownList()", ExpandAllMenuItems = true, FlattenTreeView = true)] 
+		[ValueDropdown("@GetLocalizeKeyDropDownList()", ExpandAllMenuItems = true, FlattenTreeView = true)] 
+#else
+		[LID]
 #endif
 		public string Key;
-		public int Index = -1;
-		public Func<string> DynamicMessage;
+		[Min(-1)] public int Index = -1;
+		Func<string> _dynamicMessage;
 		static bool _isRegisterQuitting;
 #if UNITY_EDITOR
-		static List<TMP_FontAsset> _fontAssets = new();
+		static List<TMPro.TMP_FontAsset> _fontAssets = new();
 #endif
-		public Material mat;
-
 		void Start()
 		{
 #if UNITY_EDITOR
@@ -50,28 +49,37 @@ namespace EmptyBraces.Localization
 		}
 		public void RefreshText()
 		{
-			var tmpro = GetComponent<TMPro.TMP_Text>();
-			if (tmpro.font.fallbackFontAssetTable.Count == 0)
+			var tm = GetComponent<TMPro.TMP_Text>();
+			if (tm.font.fallbackFontAssetTable.Count == 0)
 			{
-				tmpro.font.fallbackFontAssetTable.Add(LocalizationManager.LoadIfNeeded(tmpro.font.name));
+				tm.font.fallbackFontAssetTable.Add(LocalizationManager.LoadFontAssetIfNeeded(tm.font.name));
 			}
 			else
 			{
-				tmpro.font.fallbackFontAssetTable[0] = LocalizationManager.LoadIfNeeded(tmpro.font.name);
+				tm.font.fallbackFontAssetTable[0] = LocalizationManager.LoadFontAssetIfNeeded(tm.font.name);
 			}
-			tmpro.font.ReadFontAssetDefinition();
-			if (DynamicMessage != null)
+			tm.font.ReadFontAssetDefinition();
+			if (_dynamicMessage != null)
 			{
-				tmpro.text = DynamicMessage();
+				tm.text = _dynamicMessage();
 				return;
 			}
 			// add componentしたときはdataはnull
 			if (!string.IsNullOrEmpty(Key))
 			{
 				if (0 <= Index)
-					tmpro.text = Word.GetArray(Key)[Index];
+					tm.text = Word.GetArray(Key)[Index];
 				else
-					tmpro.text = Word.Get(Key);
+					tm.text = Word.Get(Key);
+			}
+		}
+		public void SetDynamicMessage(Func<string> cb)
+		{
+			_dynamicMessage = cb;
+			if (cb != null)
+			{
+				var tm = GetComponent<TMPro.TMP_Text>();
+				tm.text = cb();
 			}
 		}
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]

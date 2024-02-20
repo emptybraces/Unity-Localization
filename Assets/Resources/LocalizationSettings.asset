@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27cdbf90c24ff4746a1a0dd7e89ad64b, type: 3}
   m_Name: LocalizationSettings
   m_EditorClassIdentifier: 
+  _localizeFileLocation: localization
+  SourceFileLocation: 
   DefaultLanguage: 10
   SupportLanguages:
   - Language: 10
@@ -24,3 +26,18 @@ MonoBehaviour:
     Id: sc
   - Language: 6
     Id: sc
+  SupportLanguageFontAssets:
+  - MediateFontAsset: {fileID: 11400000, guid: ee01b68cf3d1e604b942012975d905c4, type: 2}
+    ActualFontAssets:
+    - {fileID: 11400000, guid: 0e5709f775994914996f0372f3d2273c, type: 2}
+    - {fileID: 11400000, guid: 711e30ee8eee5d34ebdd61a4ba1a8e62, type: 2}
+    - {fileID: 11400000, guid: 7de3f55bdf09df044addae5e584f834c, type: 2}
+    - {fileID: 11400000, guid: 7de3f55bdf09df044addae5e584f834c, type: 2}
+    - {fileID: 11400000, guid: 7de3f55bdf09df044addae5e584f834c, type: 2}
+  - MediateFontAsset: {fileID: 11400000, guid: 2a9b1851ff6587847a15273c04709d4a, type: 2}
+    ActualFontAssets:
+    - {fileID: 11400000, guid: 4b1dd579d9f490142b422edb04ff50cc, type: 2}
+    - {fileID: 11400000, guid: 0f66530c57d03a645918a1aba12f4516, type: 2}
+    - {fileID: 11400000, guid: a77fdfc76a687ae42a60c53bd221295e, type: 2}
+    - {fileID: 11400000, guid: a77fdfc76a687ae42a60c53bd221295e, type: 2}
+    - {fileID: 11400000, guid: a77fdfc76a687ae42a60c53bd221295e, type: 2}

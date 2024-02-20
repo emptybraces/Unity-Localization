@@ -16,3 +16,7 @@ status/params			攻击力
 						精神力
 
 
+title/start				从头开始
+title/load				从存档开始
+title/settings			设定
+title/version			版本{0}

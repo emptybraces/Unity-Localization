@@ -14,3 +14,9 @@ item/get				{0}を手に入れた！
 status/params			攻撃力
 						防御力
 						精神力
+
+
+title/start				はじめから
+title/load				つづきから
+title/settings			オプション
+title/version			バージョン{0}
