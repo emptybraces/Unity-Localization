@@ -10,6 +10,9 @@ https://github.com/emptybraces/Unity_Localization.git?path=Assets/upm
 
 ![localiation](https://github.com/emptybraces/Unity_Localization/assets/1441835/d76783a1-0493-4049-bad3-215ae9b4eccb)
 
+# Structure
+This code achieves the language switching by dynamically replacing the TMP_FontAsset prepared for each language. You need to prepare a base TMP_FontAsset for each material (simple, outlined, etc) and set it to TMP_Text, but since the atlas is empty, nothing can be displayed. Then, from the TmproLocalize component, the TMP_FontAsset for each language can be loaded into the FallbackFontAsset to display the characters.
+
 # How
 - Configuration file must be created in "Assets/Localization/Create Localization Settings".
 - From the configuration file, set the languages to be supported, file prefixes for word lists, etc. Next, set the font data (TMP_FontAsset) for each language and press the button below to register it in Addressables.
