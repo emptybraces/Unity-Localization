@@ -1,5 +1,4 @@
 using EmptyBraces.Localization;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 namespace EmptyBraces
@@ -8,6 +7,7 @@ namespace EmptyBraces
 	{
 		[SerializeField] TMProLocalize _tmVersion;
 		[SerializeField] Toggle[] _languageToggles;
+		[SerializeField] string _version = "1.0.0";
 		void Awake()
 		{
 			Word.LoadWordFile(SystemLanguage.English);
@@ -30,7 +30,7 @@ namespace EmptyBraces
 
 		void Start()
 		{
-			_tmVersion.SetDynamicMessage(() => Word.Get(LID.title_version, PlayerSettings.bundleVersion));
+			_tmVersion.SetDynamicMessage(() => Word.Get(LID.title_version, _version));
 		}
 
 		public void OnLoadLanguage(SystemLanguage lan)

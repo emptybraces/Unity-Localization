@@ -15,43 +15,43 @@ MonoBehaviour:
   m_GroupName: Localization
   m_Data:
     m_SerializedData: []
-  m_GUID: b43c88c948becbd4a9aaf5d96d559247
+  m_GUID: aab68eb5fa7df934eae11e0b5d725362
   m_SerializeEntries:
   - m_GUID: 0e5709f775994914996f0372f3d2273c
     m_Address: font_default
     m_ReadOnly: 0
     m_SerializedLabels:
-    - en
+    - localization_en
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 711e30ee8eee5d34ebdd61a4ba1a8e62
     m_Address: font_default
     m_ReadOnly: 0
     m_SerializedLabels:
-    - ja
+    - localization_ja
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7de3f55bdf09df044addae5e584f834c
     m_Address: font_default
     m_ReadOnly: 0
     m_SerializedLabels:
-    - sc
+    - localization_sc
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4b1dd579d9f490142b422edb04ff50cc
     m_Address: font_serif
     m_ReadOnly: 0
     m_SerializedLabels:
-    - en
+    - localization_en
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0f66530c57d03a645918a1aba12f4516
     m_Address: font_serif
     m_ReadOnly: 0
     m_SerializedLabels:
-    - ja
+    - localization_ja
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a77fdfc76a687ae42a60c53bd221295e
     m_Address: font_serif
     m_ReadOnly: 0
     m_SerializedLabels:
-    - sc
+    - localization_sc
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8baa4fcd78933614095db9c82786d5c3, type: 2}

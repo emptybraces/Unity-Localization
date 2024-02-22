@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEditor.AddressableAssets;
+using UnityEditor.AddressableAssets.Settings.GroupSchemas;
 using UnityEngine;
 namespace EmptyBraces.Localization.Editor
 {
@@ -44,10 +45,15 @@ namespace EmptyBraces.Localization.Editor
 						{
 							var entry = j.SetAddressableGroup("Localization");
 							entry.SetAddress(FontAsset.MediateFontAsset.name);
-							entry.SetLabel(settings.SupportLanguages[i].Id, true);
+							var label = LocalizationManager.k_AddressablesLabelPrefix + settings.SupportLanguages[i].Id;
+							addr.AddLabel(label);
+							entry.SetLabel(label, true);
 						}
 					}
 				}
+				var group = addr.FindGroup(LocalizationManager.k_AddressablesGroupName);
+				var schema = group.GetSchema<BundledAssetGroupSchema>();
+				schema.BundleMode = BundledAssetGroupSchema.BundlePackingMode.PackTogetherByLabel;
 			}
 		}
 	}

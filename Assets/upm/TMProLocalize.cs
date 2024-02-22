@@ -9,13 +9,8 @@ namespace EmptyBraces.Localization
 	[RequireComponent(typeof(TMPro.TMP_Text))]
 	public class TMProLocalize : MonoBehaviour
 	{
-#if ODIN_INSPECTOR
-		[ValueDropdown("@GetLocalizeKeyDropDownList()", ExpandAllMenuItems = true, FlattenTreeView = true)] 
-#else
-		[LID]
-#endif
-		public string Key;
-		[Min(-1)] public int Index = -1;
+		[LID] public string Key;
+		[Min(-1)] public int ArrayIndex = -1;
 		Func<string> _dynamicMessage;
 		static bool _isRegisterQuitting;
 #if UNITY_EDITOR
@@ -67,8 +62,8 @@ namespace EmptyBraces.Localization
 			// add componentしたときはdataはnull
 			if (!string.IsNullOrEmpty(Key))
 			{
-				if (0 <= Index)
-					tm.text = Word.GetArray(Key)[Index];
+				if (0 <= ArrayIndex)
+					tm.text = Word.GetArray(Key)[ArrayIndex];
 				else
 					tm.text = Word.Get(Key);
 			}
@@ -82,11 +77,13 @@ namespace EmptyBraces.Localization
 				tm.text = cb();
 			}
 		}
+#if UNITY_EDITOR
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
 		static void _DomainReset()
 		{
 			_isRegisterQuitting = false;
 			_fontAssets = new();
 		}
+#endif
 	}
 }

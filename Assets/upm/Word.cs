@@ -165,30 +165,11 @@ namespace EmptyBraces.Localization
 		static object[] _Format<T0, T1, T2, T3, T4, T5, T6>(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6) { _a[0] = t0; _a[1] = t1; _a[2] = t2; _a[3] = t3; _a[4] = t4; _a[5] = t5; _a[6] = t6; return _a; }
 		static object[] _Format<T0, T1, T2, T3, T4, T5, T6, T7>(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7) { _a[0] = t0; _a[1] = t1; _a[2] = t2; _a[3] = t3; _a[4] = t4; _a[5] = t5; _a[6] = t6; _a[7] = t7; return _a; }
 		static object[] _Format<T0, T1, T2, T3, T4, T5, T6, T7, T8>(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8) { _a[0] = t0; _a[1] = t1; _a[2] = t2; _a[3] = t3; _a[4] = t4; _a[5] = t5; _a[6] = t6; _a[7] = t7; _a[8] = t8; return _a; }
-#if ODIN_INSPECTOR
-		public static IEnumerable GetLocalizeKeyDropDownList()
-		{
-			if (LoadFromFile($"{Localization.ROOT_PATH}/en_word.txt").Forget()) {
-
-			}
-			var list = new ValueDropdownList<string> { "" };
-			foreach (var kvp in Data)
-			{
-				if (kvp.Value is string value)
-					list.Add($"{kvp.Key} | {value.Replace("</", "<?").Replace("\n", "")}", kvp.Key);
-				else if (kvp.Value is string[] values)
-				{
-					list.Add($"{kvp.Key} | {string.Concat(values.Select(e => e.Replace("</", "<?").Replace("\n", "") + ","))}", kvp.Key);
-				}
-			}
-			return list;
-		}
-#endif
 #if UNITY_EDITOR
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
 		static void _DomainReset()
 		{
-			Data.Clear();
+			Data?.Clear();
 		}
 #endif
 	}
