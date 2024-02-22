@@ -32,18 +32,18 @@ namespace EmptyBraces.Localization.Editor
 				if (GUILayout.Button("Load"))
 				{
 					_Reset();
-					LocalizationManager.LoadWordFile(_language);
+					Word.LoadWordFile(_language);
 					tmpro_localize.RefreshText();
  					EditorApplication.QueuePlayerLoopUpdate();
 				}
 			}
 			if (GUILayout.Button("Load Next Language"))
-			{
+			{	
 				_Reset();
 				var idx = Array.FindIndex(Settings.Instance.SupportLanguages, e => e.Language == _language);
 				idx = (int)Mathf.Repeat(idx + 1, Settings.Instance.SupportLanguages.Length);
 				_language = Settings.Instance.SupportLanguages[idx].Language;
-				LocalizationManager.LoadWordFile(_language);
+				Word.LoadWordFile(_language);
 				tmpro_localize.RefreshText();
 				EditorApplication.QueuePlayerLoopUpdate();
 			}

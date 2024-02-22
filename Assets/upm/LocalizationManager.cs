@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Assertions;
 using UnityEngine.ResourceManagement.AsyncOperations;
 namespace EmptyBraces.Localization
 {
@@ -14,31 +14,7 @@ namespace EmptyBraces.Localization
 		public const string k_SettingsFileName = "LocalizationSettings";
 		public static string CurrentLoadedLaunguageId;
 		static Dictionary<string, AsyncOperationHandle<IList<TMP_FontAsset>>> _cacheAASHandles = new();
-		public static void LoadWordFile(SystemLanguage language)
-		{
-			var lan_id = Settings.Instance.GetId(language);
-			Assert.IsNotNull(lan_id, "unsuported language: " + language);
-			if (CurrentLoadedLaunguageId == lan_id)
-				return;
-			bool failed = false;
-			var path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_id}_word.txt");
-			failed = failed || !Word.LoadFromFile(path);
-			if (failed)
-			{
-				lan_id = Settings.Instance.GetId(Application.systemLanguage);
-				cn.logwf(path, " file loading failed, retry with OS language. ", lan_id);
-				failed = false;
-				path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_id}_word.txt");
-				failed = failed || !Word.LoadFromFile(path);
-				if (failed)
-				{
-					cn.logef(path, " file loading failed");
-					return;
-				}
-			}
-			Release();
-			CurrentLoadedLaunguageId = lan_id;
-		}
+
 		public static TMP_FontAsset LoadFontAssetIfNeeded(string fontName, string lanId = null)
 		{
 			if (_cacheAASHandles.TryGetValue(fontName, out var op))

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _localizeFileLocation: localization
   SourceFileLocation: 
-  DefaultLanguage: 10
+  DefaultLanguage: 22
   SupportLanguages:
   - Language: 10
     Id: en

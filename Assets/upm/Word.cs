@@ -2,14 +2,41 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.Assertions;
 
 namespace EmptyBraces.Localization
 {
 	public static class Word
 	{
-		static string[] k_Split = new[] { "\t", " " };
-		public static Dictionary<string, object> Data = new(256);
-		static List<string> _tmpStringList = new(128);
+		public static Dictionary<string, object> Data;
+		static List<string> _tmpStringList;
+		public static bool LoadWordFile(SystemLanguage language)
+		{
+			var lan_id = Settings.Instance.GetId(language);
+			Assert.IsNotNull(lan_id, "unsupported language: " + language);
+			if (LocalizationManager.CurrentLoadedLaunguageId == lan_id)
+				return true;
+			var path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_id}_word.txt");
+			var is_success = LoadFromFile(path);
+			if (!is_success)
+			{
+				if (Application.systemLanguage != language)
+				{
+					lan_id = Settings.Instance.GetId(Application.systemLanguage);
+					cn.logwf(path, " file loading failed, retry with OS language. ", lan_id);
+					path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_id}_word.txt");
+					is_success = LoadFromFile(path);
+				}
+				if (!is_success)
+				{
+					cn.logef(path, " file loading failed");
+					return false;
+				}
+			}
+			LocalizationManager.CurrentLoadedLaunguageId = lan_id;
+			LocalizationManager.Release();
+			return true;
+		}
 		public static bool LoadFromFile(string path)
 		{
 			try
@@ -21,12 +48,12 @@ namespace EmptyBraces.Localization
 				}
 				var text = File.ReadAllText(path, System.Text.Encoding.UTF8);
 				Load(text);
-				cn.logf("Complete load.", path);
+				cn.log("Complete load.", path);
 			}
 			catch (Exception e)
 			{
 				// Dialogue.Confirm1("Fatal", "Exception occured please check the log file.").Forget();
-				Debug.LogError("Exception: " + e.Message);
+				cn.loge("Exception: ", e.Message);
 				return false;
 			}
 			return true;
@@ -39,7 +66,9 @@ namespace EmptyBraces.Localization
 				cn.loge("Text data is empty.");
 				return false;
 			}
+			Data ??= new(256);
 			Data.Clear();
+			_tmpStringList ??= new(128);
 			_tmpStringList.Clear();
 			var span_text = textData.AsSpan();
 			var line_no = 0;

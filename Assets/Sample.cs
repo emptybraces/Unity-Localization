@@ -10,7 +10,7 @@ namespace EmptyBraces
 		[SerializeField] Toggle[] _languageToggles;
 		void Awake()
 		{
-			LocalizationManager.LoadWordFile(SystemLanguage.English);
+			Word.LoadWordFile(SystemLanguage.English);
 			for (int i = 0; i < 3; ++i)
 			{
 				var icap = i;
@@ -35,7 +35,7 @@ namespace EmptyBraces
 
 		public void OnLoadLanguage(SystemLanguage lan)
 		{
-			LocalizationManager.LoadWordFile(lan);
+			Word.LoadWordFile(lan);
 			foreach (var i in FindObjectsByType<TMProLocalize>(FindObjectsSortMode.None))
 				i.RefreshText();
 		}

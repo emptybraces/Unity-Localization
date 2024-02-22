@@ -27,7 +27,7 @@ namespace EmptyBraces.Localization
 			{
 				if (i.ActualFontAssets.Length != SupportLanguages.Length)
 				{
-					cn.logw("Need to set font assets as many as the languages you want to support.");
+					Debug.LogWarning("Need to set font assets as many as the languages you want to support.");
 					break;
 				}
 			}

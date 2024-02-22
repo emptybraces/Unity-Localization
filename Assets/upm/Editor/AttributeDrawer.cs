@@ -3,7 +3,7 @@ using UnityEditor;
 using System;
 using System.Linq;
 using System.Reflection;
-using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace EmptyBraces.Localization.Editor
 {
@@ -82,7 +82,7 @@ namespace EmptyBraces.Localization.Editor
 					_FetchLIDClassField();
 					var sel_idx = EditorGUI.Popup(position, -1, _displays);
 					if (-1 < sel_idx)
-						property.stringValue = _displays[sel_idx];
+						property.stringValue = _displays[sel_idx].Split(" | ")[0];
 
 					position.x = position.xMax;
 					position.xMax = position.x + field_width * 0.8f;
@@ -97,10 +97,30 @@ namespace EmptyBraces.Localization.Editor
 				return;
 			try
 			{
+				if (Settings.Instance != null)
+					Word.LoadWordFile(Settings.Instance.DefaultLanguage);
+			}
+			catch (Exception e)
+			{
+				cn.loge(e.Message);
+			}
+			try
+			{
 				var type = typeof(EmptyBraces.Localization.LID);
 				_displays = type.GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
 					.Where(e => e.IsLiteral)
-					.Select(e => (string)e.GetRawConstantValue())
+					.Select(e =>
+					{
+						var key = (string)e.GetRawConstantValue();
+						if (Word.Data == null)
+							return key;
+						if (Word.Data.TryGetValue(key, out var value))
+							if (value is string s)
+								return $"{key} | {Regex.Replace(s, "<.*?>", "")}";
+							else if (value is string[] sa)
+								return $"{key} | {Regex.Replace(string.Join(",", sa), "<.*?>", "")}";
+						return key;
+					})
 					.ToArray();
 			}
 			catch (Exception e)
