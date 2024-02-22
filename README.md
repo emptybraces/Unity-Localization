@@ -1,5 +1,5 @@
 # Unity_Localization
-A text-based localization system.
+A text based localization system.
 Words are displayed on the TMP_Text from a word list defined in a text file prepared for each language in StreamingAssets, and can switched as needed regardless of Editor or Runtime.
 
 # Install
@@ -19,10 +19,10 @@ This code achieves the language switching by dynamically replacing the TMP_FontA
 
 ![image](https://github.com/emptybraces/Unity_Localization/assets/1441835/20063736-7528-4e2c-b0fe-90a46a4dd7dd)
 
-- Place a text file that defined word list for each language to be supported in the StreamingAssets file. Keys and values are separated by white space or tab. Also the key can have array value, which must begin with a white space or tab.
+- Place a text file that defines the word list for each language to be supported in the StreamingAssets folder. Keys and values are separated by spaces or tabs. The key can also have an array value that must begin with a space or tab.
 
 ![image](https://github.com/emptybraces/Unity_Localization/assets/1441835/cbe15108-09d1-48a7-af7e-dcd328c4e83d)
 
-- AssetPostprocessor is implemented, and the word list file in the folder specified in Settings will automatically create LID.cs when detect to updated. It can also be called manually from "Assets/Localization/Create LID.cs".
+- AssetPostprocessor is implemented, and the word list file in the folder specified in Settings will automatically create LID.cs when detect to updated. It can also be run manually from "Assets/Localization/Create LID.cs".
 
 ![image](https://github.com/emptybraces/Unity_Localization/assets/1441835/e3f33611-fa33-45ca-9456-8923b1b0ad80)
