@@ -15,7 +15,8 @@ https://github.com/emptybraces/Unity_Localization.git?path=Assets/upm
 - From the configuration file, set the languages to be supported, file prefixes for word lists, etc. Next, set the font data (TMP_FontAsset) for each language and press the button below to register it in Addressables.
 ![image](https://github.com/emptybraces/Unity_Localization/assets/1441835/20063736-7528-4e2c-b0fe-90a46a4dd7dd)
 
-- Place a text file that defined word list for each language to be supported in the StreamingAssets file.
+- Place a text file that defined word list for each language to be supported in the StreamingAssets file. Keys and values are separated by white space or tab. Also the key can have array value, which must begin with a white space or tab.
 ![image](https://github.com/emptybraces/Unity_Localization/assets/1441835/cbe15108-09d1-48a7-af7e-dcd328c4e83d)
 
-
+- AssetPostprocessor is implemented, and the word list file in the folder specified in Settings will automatically create LID.cs when detect to updated. It can also be called manually from "Assets/Localization/Create LID.cs".
+![image](https://github.com/emptybraces/Unity_Localization/assets/1441835/e3f33611-fa33-45ca-9456-8923b1b0ad80)
