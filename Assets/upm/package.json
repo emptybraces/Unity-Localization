@@ -12,9 +12,9 @@
   },
   "samples": [
       {
-          "displayName": "Sample Scene",
-          "description": "Sample settings. Please Move \"StreamingAssets\" folder to root \"Assets\"",
-          "path": "Samples~/Sample_Scene"
+          "displayName": "Sample Settings",
+          "description": "You will get an error, please move the StreamingAssets folder to the Assets folder, LID.cs will be created and the error will be resolved.",
+          "path": "Samples~/Sample_Settings"
       }
   ]
 }
