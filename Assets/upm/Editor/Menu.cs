@@ -7,7 +7,7 @@ namespace EmptyBraces.Localization.Editor
 {
 	public static class Menu
 	{
-		[MenuItem("Assets/Localization/Create Localization Settings")]
+		[MenuItem("Assets/Create/Localization/Create Localization Settings")]
 		public static void MakeSettingsAssetIfNeeded()
 		{
 			var asset = Resources.Load<ScriptableObject>(LocalizationManager.k_SettingsFileName);
@@ -23,7 +23,7 @@ namespace EmptyBraces.Localization.Editor
 			EditorGUIUtility.PingObject(asset);
 		}
 
-		[MenuItem("Assets/Localization/Create LID.cs", false)]
+		[MenuItem("Assets/Create/Localization/Create LID.cs", false)]
 		public static void CreateLID()
 		{
 			Debug.Log("CreateLID: Start");
