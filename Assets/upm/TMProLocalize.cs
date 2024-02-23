@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-#if ODIN_INSPECTOR
-using Sirenix.OdinInspector;
-#endif
 namespace EmptyBraces.Localization
 {
 	[RequireComponent(typeof(TMPro.TMP_Text))]
@@ -26,7 +23,7 @@ namespace EmptyBraces.Localization
 				_fontAssets.Add(font);
 				Application.quitting += () =>
 				{
-					cn.log("Clear font fallback list", font);
+					Debug.Log($"Clear font fallback list. {font}");
 					font.fallbackFontAssetTable.Clear();
 				};
 

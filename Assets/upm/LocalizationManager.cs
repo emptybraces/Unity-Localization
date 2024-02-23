@@ -19,7 +19,7 @@ namespace EmptyBraces.Localization
 			if (_cacheAASHandles.TryGetValue(fontName, out var op))
 				return op.Status == AsyncOperationStatus.Succeeded ? op.Result[0] : null;
 			lanId ??= CurrentLoadedLaunguageId;
-			cn.logf(fontName, lanId);
+			// cn.logf(fontName, lanId);
 			var handle = Addressables.LoadAssetsAsync<TMP_FontAsset>((IEnumerable)new object[] { fontName, k_AddressablesLabelPrefix + lanId }, null, Addressables.MergeMode.Intersection);
 			_cacheAASHandles[fontName] = handle;
 			handle.WaitForCompletion();
@@ -28,7 +28,7 @@ namespace EmptyBraces.Localization
 
 		public static void Release()
 		{
-			cn.logf();
+			// cn.logf();
 			foreach (var i in _cacheAASHandles.Values)
 				if (i.IsValid())
 					Addressables.Release(i);

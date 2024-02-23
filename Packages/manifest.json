@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.emptybraces.cn": "https://github.com/emptybraces/Unity_cn.git?path=UPM",
     "com.unity.addressables": "1.21.20",
     "com.unity.ide.visualstudio": "2.0.22",
     "com.unity.ugui": "2.0.0",

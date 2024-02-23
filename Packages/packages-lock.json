@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.emptybraces.cn": {
-      "version": "https://github.com/emptybraces/Unity_cn.git?path=UPM",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "f4451367e8dc5cd4bdce0e4e000e4a421249d076"
-    },
     "com.unity.addressables": {
       "version": "1.21.20",
       "depth": 0,

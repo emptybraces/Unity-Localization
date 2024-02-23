@@ -102,7 +102,7 @@ namespace EmptyBraces.Localization.Editor
 			}
 			catch (Exception e)
 			{
-				cn.loge(e.Message);
+				Debug.LogError(e.Message);
 			}
 			try
 			{
@@ -125,7 +125,7 @@ namespace EmptyBraces.Localization.Editor
 			}
 			catch (Exception e)
 			{
-				cn.loge(e.Message);
+				Debug.LogError(e.Message);
 				_displays = new string[0];
 			}
 		}

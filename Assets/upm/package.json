@@ -7,7 +7,5 @@
   "description": "Text based localization system.",
   "keywords": ["unity, localization"],
   "category": "Utility",
-  "dependencies": {
-    "com.emptybraces.cn": "https://github.com/emptybraces/Unity_cn.git?path=UPM#1.0.1"
-  }
+  "dependencies": {}
 }

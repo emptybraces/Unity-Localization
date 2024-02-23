@@ -26,7 +26,7 @@ namespace EmptyBraces.Localization.Editor
 		[MenuItem("Assets/Localization/Create LID.cs", false)]
 		public static void CreateLID()
 		{
-			cn.logf("Start");
+			Debug.Log("CreateLID: Start");
 			var path_src = Path.Combine(Application.streamingAssetsPath, Settings.Instance.LocalizeFileLocation, $"{Settings.Instance.GetDefaultLaunguageId()}_word.txt");
 			var path_output_parent = Path.Combine(Application.dataPath, Settings.Instance.SourceFileLocation);
 			var path_output = Path.Combine(path_output_parent, "LID.cs");
@@ -51,12 +51,13 @@ namespace EmptyBraces.Localization
 					var idx = trimmed.IndexOfAny(new char[] { '\t', ' ' });
 					if (idx == -1)
 					{
-						cn.logw("detect array elements.", line);
+						if (Settings.Instance.OutputDebugLog)
+							Debug.Log($"Detect array elements. {line}");
 						continue;
 					}
 					var key = trimmed[..idx];
 					var var_name = key.Replace("/", "_");
-					sb.AppendLine($"public const string {var_name} = \"{key}\";");
+					sb.AppendLine($"\t\tpublic const string {var_name} = \"{key}\";");
 				}
 				sb.AppendLine("}");
 				sb.AppendLine("}");
@@ -70,7 +71,7 @@ namespace EmptyBraces.Localization
 				Debug.LogError(e);
 				return;
 			}
-			cn.logf("Compoleted");
+			Debug.Log("CreateLID: Completed.");
 		}
 		[MenuItem("Assets/Localization/Create LID.cs", true)]
 		public static bool CreateLIDValidate()

@@ -7,6 +7,7 @@ namespace EmptyBraces.Localization
 		[SerializeField] string _localizeFileLocation = "localization";
 		public string LocalizeFileLocation => Path.Combine(Application.streamingAssetsPath, _localizeFileLocation);
 		public string SourceFileLocation = "";
+		public bool OutputDebugLog = true;
 		public SystemLanguage DefaultLanguage = SystemLanguage.English;
 		public SupportLanguage[] SupportLanguages;
 

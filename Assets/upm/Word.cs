@@ -23,13 +23,13 @@ namespace EmptyBraces.Localization
 				if (Application.systemLanguage != language)
 				{
 					lan_id = Settings.Instance.GetId(Application.systemLanguage);
-					cn.logwf(path, " file loading failed, retry with OS language. ", lan_id);
+					Debug.LogWarning($"{path} file loading failed, retry with OS language. {lan_id}");
 					path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_id}_word.txt");
 					is_success = LoadFromFile(path);
 				}
 				if (!is_success)
 				{
-					cn.logef(path, " file loading failed");
+					Debug.LogError($"{path} file loading failed.");
 					return false;
 				}
 			}
@@ -43,17 +43,17 @@ namespace EmptyBraces.Localization
 			{
 				if (!File.Exists(path))
 				{
-					cn.loge("File not found. path is", path);
+					Debug.LogError($"File not found. path is {path}");
 					return false;
 				}
 				var text = File.ReadAllText(path, System.Text.Encoding.UTF8);
 				Load(text);
-				cn.log("Complete load.", path);
+				Debug.Log($"Complete load. {path}");
 			}
 			catch (Exception e)
 			{
 				// Dialogue.Confirm1("Fatal", "Exception occured please check the log file.").Forget();
-				cn.loge("Exception: ", e.Message);
+				Debug.LogError($"Exception: {e.Message}");
 				return false;
 			}
 			return true;
@@ -63,7 +63,7 @@ namespace EmptyBraces.Localization
 		{
 			if (string.IsNullOrEmpty(textData))
 			{
-				cn.loge("Text data is empty.");
+				Debug.LogError("Text data is empty.");
 				return false;
 			}
 			Data ??= new(256);
@@ -114,7 +114,6 @@ namespace EmptyBraces.Localization
 					// セパレータがないなら、キー＋空欄で登録する。
 					var key = key_idx == -1 ? line : line[..key_idx];
 					last_key = key.ToString();
-					// cn.logBlue(key_idx, last_key);
 
 					// valueの検出
 					string value = ""; // セパレータがないなら、キー＋空欄で登録する。
@@ -124,7 +123,8 @@ namespace EmptyBraces.Localization
 						value = value_span.ToString();
 					}
 					// 格納
-					cn.log($"Add | K={last_key}, V={value}");
+					if (Settings.Instance.OutputDebugLog)
+						Debug.Log($"Add | K={last_key}, V={value}");
 					Data.Add(last_key, value);
 				}
 			}
@@ -138,7 +138,8 @@ namespace EmptyBraces.Localization
 			{
 				values.Insert(0, (string)Data[lastKey]); // 先頭のキーを配列の先頭に設定する。
 				Data[lastKey] = values.ToArray(); // 上書きする。
-				cn.log($"AddArray | K={lastKey}, V={string.Join(",", values)}");
+				if (Settings.Instance.OutputDebugLog)
+					Debug.Log($"AddArray | K={lastKey}, V={string.Join(",", values)}");
 				values.Clear();
 			}
 		}
