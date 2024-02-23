@@ -13,7 +13,7 @@
   "samples": [
       {
           "displayName": "Sample Settings",
-          "description": "After import, you will get an error, please move the StreamingAssets folder to the Assets folder, LID.cs will be created and the error will be resolved. Also need Import TMP Essencials",
+          "description": "After import, you will get an error, please move the StreamingAssets folder to the Assets folder, LID.cs will be created and the error will be resolved. If you have not yet imported TextmeshPro for a project, you will need to do Import TMP Essentials. And if you have not initialized Addressables, do so. Then press the button at the bottom of Resources/Settings. Then this sample will work.",
           "path": "Samples~/Sample_Settings"
       }
   ]
