@@ -15,7 +15,7 @@ MonoBehaviour:
   m_GroupName: Localization
   m_Data:
     m_SerializedData: []
-  m_GUID: aab68eb5fa7df934eae11e0b5d725362
+  m_GUID: a0ad6d69d0f2cd44296707a37fe06ef2
   m_SerializeEntries:
   - m_GUID: 0e5709f775994914996f0372f3d2273c
     m_Address: font_default

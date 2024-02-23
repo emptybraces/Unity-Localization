@@ -34,8 +34,6 @@ namespace EmptyBraces.Localization.Editor
 			if (GUILayout.Button("Register above FontAsset to Addressables"))
 			{
 				var addr = AddressableAssetSettingsDefaultObject.Settings;
-				// グループは消してから作る
-				addr.RemoveGroup(addr.FindGroup(LocalizationManager.k_AddressablesGroupName));
 				foreach (var FontAsset in settings.SupportLanguageFontAssets)
 				{
 					for (int i = 0; i < FontAsset.ActualFontAssets.Length; ++i)
