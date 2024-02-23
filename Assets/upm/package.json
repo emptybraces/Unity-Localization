@@ -7,5 +7,14 @@
   "description": "Text based localization system.",
   "keywords": ["unity, localization"],
   "category": "Utility",
-  "dependencies": {}
+  "dependencies": {
+    "com.unity.addressables": "1.21.20"
+  },
+  "samples": [
+      {
+          "displayName": "Sample Scene",
+          "description": "Sample settings",
+          "path": "Samples/Sample_Scene"
+      }
+  ]
 }
