@@ -106,22 +106,31 @@ namespace EmptyBraces.Localization.Editor
 			}
 			try
 			{
-				var type = typeof(EmptyBraces.Localization.LID);
-				_displays = type.GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
-					.Where(e => e.IsLiteral)
-					.Select(e =>
-					{
-						var key = (string)e.GetRawConstantValue();
-						if (Word.Data == null)
+
+				Type type = null;
+				var assembly = Assembly.Load("Assembly-CSharp");
+				// Debug.Log(assembly);
+				if (assembly != null)
+					type = assembly.GetType("EmptyBraces.Localization.LID");
+				// Debug.Log(type);
+				if (type != null)
+				{
+					_displays = type.GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.DeclaredOnly)
+						.Where(e => e.IsLiteral)
+						.Select(e =>
+						{
+							var key = (string)e.GetRawConstantValue();
+							if (Word.Data == null)
+								return key;
+							if (Word.Data.TryGetValue(key, out var value))
+								if (value is string s)
+									return $"{key} | {Regex.Replace(s, "<.*?>", "")}";
+								else if (value is string[] sa)
+									return $"{key} | {Regex.Replace(string.Join(",", sa), "<.*?>", "")}";
 							return key;
-						if (Word.Data.TryGetValue(key, out var value))
-							if (value is string s)
-								return $"{key} | {Regex.Replace(s, "<.*?>", "")}";
-							else if (value is string[] sa)
-								return $"{key} | {Regex.Replace(string.Join(",", sa), "<.*?>", "")}";
-						return key;
-					})
-					.ToArray();
+						})
+						.ToArray();
+				}
 			}
 			catch (Exception e)
 			{

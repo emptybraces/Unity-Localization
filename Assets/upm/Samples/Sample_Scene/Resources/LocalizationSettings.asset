@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: LocalizationSettings
   m_EditorClassIdentifier: 
   _localizeFileLocation: localization
-  SourceFileLocation: 
+  SourceFileLocation: upm/Samples/Sample_Scene
+  OutputDebugLog: 1
   DefaultLanguage: 22
   SupportLanguages:
   - Language: 10
@@ -21,11 +22,11 @@ MonoBehaviour:
   - Language: 22
     Prefix: ja
   - Language: 40
-    Prefix: cn
+    Prefix: sc
   - Language: 41
-    Prefix: cn
+    Prefix: sc
   - Language: 6
-    Prefix: cn
+    Prefix: sc
   SupportLanguageFontAssets:
   - MediateFontAsset: {fileID: 11400000, guid: ee01b68cf3d1e604b942012975d905c4, type: 2}
     ActualFontAssets:

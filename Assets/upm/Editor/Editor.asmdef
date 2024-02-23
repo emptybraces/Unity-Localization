@@ -1,0 +1,20 @@
+{
+    "name": "EmptyBraces.Localization.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:69448af7b92c7f342b298e06a37122aa",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:b54835a382fea9e4bb9eaf4d16bbad5b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
