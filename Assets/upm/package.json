@@ -13,7 +13,7 @@
   "samples": [
       {
           "displayName": "Sample Settings",
-          "description": "You will get an error, please move the StreamingAssets folder to the Assets folder, LID.cs will be created and the error will be resolved.",
+          "description": "After import, you will get an error, please move the StreamingAssets folder to the Assets folder, LID.cs will be created and the error will be resolved. Also need Import TMP Essencials",
           "path": "Samples~/Sample_Settings"
       }
   ]
