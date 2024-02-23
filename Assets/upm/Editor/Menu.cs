@@ -88,7 +88,7 @@ namespace EmptyBraces.Localization
 					{
 						foreach (var j in Settings.Instance.SupportLanguages)
 						{
-							if (i.EndsWith($"{j.Id}_word.txt", StringComparison.Ordinal))
+							if (i.EndsWith($"{j.Prefix}_word.txt", StringComparison.Ordinal))
 							{
 								CreateLID();
 								break;

@@ -45,7 +45,7 @@ namespace EmptyBraces.Localization.Editor
 						{
 							var entry = j.SetAddressableGroup("Localization");
 							entry.SetAddress(FontAsset.MediateFontAsset.name);
-							var label = LocalizationManager.k_AddressablesLabelPrefix + settings.SupportLanguages[i].Id;
+							var label = LocalizationManager.k_AddressablesLabelPrefix + settings.SupportLanguages[i].Prefix;
 							addr.AddLabel(label);
 							entry.SetLabel(label, true);
 						}

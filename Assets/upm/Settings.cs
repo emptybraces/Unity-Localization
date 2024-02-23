@@ -41,21 +41,21 @@ namespace EmptyBraces.Localization
 		public class SupportLanguage
 		{
 			public SystemLanguage Language;
-			public string Id;
+			public string Prefix;
 		}
 
 		public string GetId(SystemLanguage lan)
 		{
 			foreach (var i in SupportLanguages)
 				if (i.Language == lan)
-					return i.Id;
+					return i.Prefix;
 			return null;
 		}
 		public string GetDefaultLaunguageId()
 		{
 			foreach (var i in SupportLanguages)
 				if (i.Language == DefaultLanguage)
-					return i.Id;
+					return i.Prefix;
 			return null;
 		}
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]

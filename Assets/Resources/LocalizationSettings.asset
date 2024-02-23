@@ -17,15 +17,15 @@ MonoBehaviour:
   DefaultLanguage: 22
   SupportLanguages:
   - Language: 10
-    Id: en
+    Prefix: en
   - Language: 22
-    Id: ja
+    Prefix: ja
   - Language: 40
-    Id: sc
+    Prefix: cn
   - Language: 41
-    Id: sc
+    Prefix: cn
   - Language: 6
-    Id: sc
+    Prefix: cn
   SupportLanguageFontAssets:
   - MediateFontAsset: {fileID: 11400000, guid: ee01b68cf3d1e604b942012975d905c4, type: 2}
     ActualFontAssets:
