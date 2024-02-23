@@ -8,6 +8,6 @@
   "keywords": ["unity, localization"],
   "category": "Utility",
   "dependencies": {
-    "com.emptybraces.cn": "1.0.1"
+    "com.emptybraces.cn": "https://github.com/emptybraces/Unity_cn.git?path=UPM"
   }
 }
