@@ -7,6 +7,15 @@ using System.Text.RegularExpressions;
 
 namespace EmptyBraces.Localization.Editor
 {
+	[CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
+	public class ReadOnlyDrawer : PropertyDrawer
+	{
+		public override void OnGUI(Rect _position, SerializedProperty _property, GUIContent _label)
+		{
+			GUI.enabled = false;
+			EditorGUI.PropertyField(_position, _property, _label);
+		}
+	}
 	[CustomPropertyDrawer(typeof(SupportLanguagePopupAttribute))]
 	public class SupportLanguagePopupAttributeDrawer : PropertyDrawer
 	{

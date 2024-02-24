@@ -31,7 +31,7 @@ namespace EmptyBraces.Localization.Editor
 				// _language = (SystemLanguage)EditorGUILayout.EnumPopup("Load Language", _language);
 				if (GUILayout.Button("Load"))
 				{
-					_Reset();
+					_ResetWithoutText();
 					Word.LoadWordFile(_language);
 					tmpro_localize.RefreshText();
 					EditorApplication.QueuePlayerLoopUpdate();
@@ -39,12 +39,7 @@ namespace EmptyBraces.Localization.Editor
 			}
 			if (GUILayout.Button("Load Next Language"))
 			{
-				var c = tmpro_localize.GetComponent<TMPro.TMP_Text>();
-				var text = c.text;
-				c.text = "";
-				foreach (var i in tmpro_localize.GetComponentsInChildren<TMPro.TMP_SubMeshUI>())
-					DestroyImmediate(i.gameObject);
-				c.text = text;
+				_ResetWithoutText();
 				var idx = Array.FindIndex(Settings.Instance.SupportLanguages, e => e.Language == _language);
 				idx = (int)Mathf.Repeat(idx + 1, Settings.Instance.SupportLanguages.Length);
 				_language = Settings.Instance.SupportLanguages[idx].Language;
@@ -66,6 +61,16 @@ namespace EmptyBraces.Localization.Editor
 			{
 				DestroyImmediate(i.gameObject);
 			}
+		}
+		void _ResetWithoutText()
+		{
+			var tmpro_localize = (TMProLocalize)target;
+			var c = tmpro_localize.GetComponent<TMPro.TMP_Text>();
+			var text = c.text;
+			c.text = "";
+			foreach (var i in tmpro_localize.GetComponentsInChildren<TMPro.TMP_SubMeshUI>())
+				DestroyImmediate(i.gameObject);
+			c.text = text;
 		}
 	}
 }

@@ -36,10 +36,80 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 7de3f55bdf09df044addae5e584f834c, type: 2}
     - {fileID: 11400000, guid: 7de3f55bdf09df044addae5e584f834c, type: 2}
     - {fileID: 11400000, guid: 7de3f55bdf09df044addae5e584f834c, type: 2}
+    ActualFontAssetRefs:
+    - m_AssetGUID: 0e5709f775994914996f0372f3d2273c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    - m_AssetGUID: 711e30ee8eee5d34ebdd61a4ba1a8e62
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    - m_AssetGUID: 7de3f55bdf09df044addae5e584f834c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    - m_AssetGUID: 7de3f55bdf09df044addae5e584f834c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    - m_AssetGUID: 7de3f55bdf09df044addae5e584f834c
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
   - MediateFontAsset: {fileID: 11400000, guid: 2a9b1851ff6587847a15273c04709d4a, type: 2}
     ActualFontAssets:
-    - {fileID: 11400000, guid: 4b1dd579d9f490142b422edb04ff50cc, type: 2}
     - {fileID: 11400000, guid: 0f66530c57d03a645918a1aba12f4516, type: 2}
+    - {fileID: 11400000, guid: 4b1dd579d9f490142b422edb04ff50cc, type: 2}
     - {fileID: 11400000, guid: a77fdfc76a687ae42a60c53bd221295e, type: 2}
     - {fileID: 11400000, guid: a77fdfc76a687ae42a60c53bd221295e, type: 2}
     - {fileID: 11400000, guid: a77fdfc76a687ae42a60c53bd221295e, type: 2}
+    ActualFontAssetRefs:
+    - m_AssetGUID: 0f66530c57d03a645918a1aba12f4516
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    - m_AssetGUID: 4b1dd579d9f490142b422edb04ff50cc
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    - m_AssetGUID: a77fdfc76a687ae42a60c53bd221295e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    - m_AssetGUID: a77fdfc76a687ae42a60c53bd221295e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    - m_AssetGUID: a77fdfc76a687ae42a60c53bd221295e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - MediateFontAsset: {fileID: 11400000, guid: b98c5287949fcba4c8a98cbcaf99ff65, type: 2}
+    ActualFontAssets:
+    - {fileID: 11400000, guid: 0f66530c57d03a645918a1aba12f4516, type: 2}
+    - {fileID: 11400000, guid: 4b1dd579d9f490142b422edb04ff50cc, type: 2}
+    - {fileID: 11400000, guid: a77fdfc76a687ae42a60c53bd221295e, type: 2}
+    - {fileID: 11400000, guid: a77fdfc76a687ae42a60c53bd221295e, type: 2}
+    - {fileID: 11400000, guid: a77fdfc76a687ae42a60c53bd221295e, type: 2}
+    ActualFontAssetRefs:
+    - m_AssetGUID: 0f66530c57d03a645918a1aba12f4516
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    - m_AssetGUID: 4b1dd579d9f490142b422edb04ff50cc
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    - m_AssetGUID: a77fdfc76a687ae42a60c53bd221295e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    - m_AssetGUID: a77fdfc76a687ae42a60c53bd221295e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+    - m_AssetGUID: a77fdfc76a687ae42a60c53bd221295e
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1

@@ -12,10 +12,10 @@ namespace EmptyBraces.Localization
 		static List<string> _tmpStringList;
 		public static bool LoadWordFile(SystemLanguage language)
 		{
+			if (LocalizationManager.CurrentLoadedLaunguage == language)
+				return true;
 			var lan_id = Settings.Instance.GetId(language);
 			Assert.IsNotNull(lan_id, "unsupported language: " + language);
-			if (LocalizationManager.CurrentLoadedLaunguageId == lan_id)
-				return true;
 			var path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_id}_word.txt");
 			var is_success = LoadFromFile(path);
 			if (!is_success)
@@ -33,7 +33,7 @@ namespace EmptyBraces.Localization
 					return false;
 				}
 			}
-			LocalizationManager.CurrentLoadedLaunguageId = lan_id;
+			LocalizationManager.CurrentLoadedLaunguage = language;
 			LocalizationManager.Release();
 			return true;
 		}

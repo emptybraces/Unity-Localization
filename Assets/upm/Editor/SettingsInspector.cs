@@ -11,6 +11,7 @@ namespace EmptyBraces.Localization.Editor
 		public override void OnInspectorGUI()
 		{
 			base.OnInspectorGUI();
+
 			EditorGUILayout.LabelField("Helper Menu:", EditorStyles.boldLabel);
 			var settings = target as Settings;
 			int error_no = 0;
@@ -44,21 +45,26 @@ namespace EmptyBraces.Localization.Editor
 						group.RemoveAssetEntry(i);
 					}
 				}
-				foreach (var FontAsset in settings.SupportLanguageFontAssets)
+				// Addresasblesの登録と、ActualFontAssetRefsを埋める
+				foreach (var item in settings.SupportLanguageFontAssets)
 				{
-					for (int i = 0; i < FontAsset.ActualFontAssets.Length; ++i)
+					for (int i = 0; i < item.ActualFontAssets.Length; ++i)
 					{
-						var j = FontAsset.ActualFontAssets[i];
+						var j = item.ActualFontAssets[i];
 						if (j != null)
 						{
 							var entry = j.SetAddressableGroup(LocalizationManager.k_AddressablesGroupName);
-							entry.SetAddress(FontAsset.MediateFontAsset.name);
+							entry.SetAddress(j.name);
+							// bundletypeでラベルごとにまとめるので必要
 							var label = LocalizationManager.k_AddressablesLabelPrefix + settings.SupportLanguages[i].Prefix;
 							aas_settings.AddLabel(label);
 							entry.SetLabel(label, true);
+							// AssetRefrenceを埋める
+							item.ActualFontAssetRefs[i].SetEditorAsset(j);
 						}
 					}
 				}
+				// ラベルごとにまとめる
 				group = aas_settings.FindGroup(LocalizationManager.k_AddressablesGroupName);
 				var schema = group.GetSchema<BundledAssetGroupSchema>();
 				schema.BundleMode = BundledAssetGroupSchema.BundlePackingMode.PackTogetherByLabel;
@@ -68,6 +74,13 @@ namespace EmptyBraces.Localization.Editor
 			{
 				Menu.CreateLID();
 			}
+			// if (GUILayout.Button("Test"))
+			// {
+			// 	Debug.Log(settings.SupportLanguageFontAssets[0].ActualFontAssetRef.RuntimeKey);
+			// 	Debug.Log(settings.SupportLanguageFontAssets[0].ActualFontAssetRef.Asset);
+			// 	Debug.Log(settings.SupportLanguageFontAssets[0].ActualFontAssetRef.AssetGUID);
+			// 	Debug.Log(settings.SupportLanguageFontAssets[0].ActualFontAssetRef.editorAsset);
+			// }
 		}
 	}
 }

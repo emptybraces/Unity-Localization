@@ -1,5 +1,8 @@
+using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.Assertions;
 namespace EmptyBraces.Localization
 {
 	public class Settings : ScriptableObject
@@ -11,22 +14,28 @@ namespace EmptyBraces.Localization
 		public string AutoGenerateLocalizeKeyFileNamespace = "EmptyBraces.Localization";
 		public bool EnableDebugLog = true;
 		public SupportLanguage[] SupportLanguages;
-
-#if UNITY_EDITOR
-		[Header("Helper for register to Addressables Group")]
 		public FontAssetData[] SupportLanguageFontAssets;
 		[System.Serializable]
 		public class FontAssetData
 		{
 			public TMPro.TMP_FontAsset MediateFontAsset;
 			[Tooltip("Set the FontAsset in order of SupportLanguage listitem.")]
+#if UNITY_EDITOR
 			[SupportedLanguageArray] public TMPro.TMP_FontAsset[] ActualFontAssets;
+#endif
+			[ReadOnly] public AssetReference[] ActualFontAssetRefs; // エディタ側で入れる
 		}
 
+#if UNITY_EDITOR
 		void OnValidate()
 		{
 			foreach (var i in SupportLanguageFontAssets)
 			{
+				if (i.ActualFontAssets.Length != i.ActualFontAssetRefs.Length)
+				{
+					Debug.Log("Detect array changed.");
+					Array.Resize(ref i.ActualFontAssetRefs, i.ActualFontAssets.Length);
+				}
 				if (i.ActualFontAssets.Length != SupportLanguages.Length)
 				{
 					Debug.LogWarning("Need to set font assets as many as the languages you want to support.");
@@ -46,6 +55,15 @@ namespace EmptyBraces.Localization
 			public string Prefix;
 		}
 
+		public int GetIndex(SystemLanguage lan)
+		{
+			for (int i = 0; i < SupportLanguages.Length; i++)
+			{
+				if (SupportLanguages[i].Language == lan)
+					return i;
+			}
+			return -1;
+		}
 		public string GetId(SystemLanguage lan)
 		{
 			foreach (var i in SupportLanguages)

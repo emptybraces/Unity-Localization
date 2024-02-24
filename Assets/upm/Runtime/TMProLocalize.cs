@@ -44,11 +44,11 @@ namespace EmptyBraces.Localization
 			var tm = GetComponent<TMPro.TMP_Text>();
 			if (tm.font.fallbackFontAssetTable.Count == 0)
 			{
-				tm.font.fallbackFontAssetTable.Add(LocalizationManager.LoadFontAssetIfNeeded(tm.font.name));
+				tm.font.fallbackFontAssetTable.Add(LocalizationManager.LoadFontAssetIfNeeded(tm.font));
 			}
 			else
 			{
-				tm.font.fallbackFontAssetTable[0] = LocalizationManager.LoadFontAssetIfNeeded(tm.font.name);
+				tm.font.fallbackFontAssetTable[0] = LocalizationManager.LoadFontAssetIfNeeded(tm.font);
 			}
 			tm.font.ReadFontAssetDefinition();
 			if (_dynamicMessage != null)
