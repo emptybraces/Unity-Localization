@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEditor;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings.GroupSchemas;
@@ -33,7 +34,16 @@ namespace EmptyBraces.Localization.Editor
 			}
 			if (GUILayout.Button("Register above FontAsset to Addressables"))
 			{
-				var addr = AddressableAssetSettingsDefaultObject.Settings;
+				var aas_settings = AddressableAssetSettingsDefaultObject.Settings;
+				// 最初に全てのアドレスを消す
+				var group = aas_settings.FindGroup(LocalizationManager.k_AddressablesGroupName);
+				if (group)
+				{
+					foreach (var i in group.entries.ToArray())
+					{
+						group.RemoveAssetEntry(i);
+					}
+				}
 				foreach (var FontAsset in settings.SupportLanguageFontAssets)
 				{
 					for (int i = 0; i < FontAsset.ActualFontAssets.Length; ++i)
@@ -41,15 +51,15 @@ namespace EmptyBraces.Localization.Editor
 						var j = FontAsset.ActualFontAssets[i];
 						if (j != null)
 						{
-							var entry = j.SetAddressableGroup("Localization");
+							var entry = j.SetAddressableGroup(LocalizationManager.k_AddressablesGroupName);
 							entry.SetAddress(FontAsset.MediateFontAsset.name);
 							var label = LocalizationManager.k_AddressablesLabelPrefix + settings.SupportLanguages[i].Prefix;
-							addr.AddLabel(label);
+							aas_settings.AddLabel(label);
 							entry.SetLabel(label, true);
 						}
 					}
 				}
-				var group = addr.FindGroup(LocalizationManager.k_AddressablesGroupName);
+				group = aas_settings.FindGroup(LocalizationManager.k_AddressablesGroupName);
 				var schema = group.GetSchema<BundledAssetGroupSchema>();
 				schema.BundleMode = BundledAssetGroupSchema.BundlePackingMode.PackTogetherByLabel;
 			}
