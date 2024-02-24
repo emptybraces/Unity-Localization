@@ -34,12 +34,17 @@ namespace EmptyBraces.Localization.Editor
 					_Reset();
 					Word.LoadWordFile(_language);
 					tmpro_localize.RefreshText();
- 					EditorApplication.QueuePlayerLoopUpdate();
+					EditorApplication.QueuePlayerLoopUpdate();
 				}
 			}
 			if (GUILayout.Button("Load Next Language"))
-			{	
-				_Reset();
+			{
+				var c = tmpro_localize.GetComponent<TMPro.TMP_Text>();
+				var text = c.text;
+				c.text = "";
+				foreach (var i in tmpro_localize.GetComponentsInChildren<TMPro.TMP_SubMeshUI>())
+					DestroyImmediate(i.gameObject);
+				c.text = text;
 				var idx = Array.FindIndex(Settings.Instance.SupportLanguages, e => e.Language == _language);
 				idx = (int)Mathf.Repeat(idx + 1, Settings.Instance.SupportLanguages.Length);
 				_language = Settings.Instance.SupportLanguages[idx].Language;

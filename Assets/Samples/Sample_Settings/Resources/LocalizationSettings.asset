@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultLanguage: 22
   _localizeFileLocation: localization
-  AutoGenerateLocalizeKeyFileLocation: Samples/Sample_Settings/Test
+  AutoGenerateLocalizeKeyFileLocation: Samples/Sample_Settings
   AutoGenerateLocalizeKeyFileNamespace: EmptyBraces.Localization
   EnableDebugLog: 1
   SupportLanguages:
