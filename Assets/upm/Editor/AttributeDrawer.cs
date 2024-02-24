@@ -99,10 +99,16 @@ namespace EmptyBraces.Localization.Editor
 			{
 				if (Settings.Instance != null)
 					Word.LoadWordFile(Settings.Instance.DefaultLanguage);
+				else
+				{
+					Debug.LogWarning("Not found LocalizationSettings, please create it.");
+					_displays = new string[0];
+				}
 			}
 			catch (Exception e)
 			{
 				Debug.LogError(e.Message);
+				_displays = new string[0];
 			}
 			try
 			{
@@ -111,7 +117,14 @@ namespace EmptyBraces.Localization.Editor
 				var assembly = Assembly.Load("Assembly-CSharp");
 				// Debug.Log(assembly);
 				if (assembly != null)
+				{
 					type = assembly.GetType("EmptyBraces.Localization.LID");
+					if (type == null)
+					{
+						Debug.LogWarning("Not found Lid.cs, please create it.");
+						_displays = new string[0];
+					}
+				}
 				// Debug.Log(type);
 				if (type != null)
 				{
