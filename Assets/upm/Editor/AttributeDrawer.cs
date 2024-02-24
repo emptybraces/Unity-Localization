@@ -78,14 +78,16 @@ namespace EmptyBraces.Localization.Editor
 				using (var scope = new EditorGUI.ChangeCheckScope())
 				{
 					var field_width = position.width;
-					position.xMax = position.x + field_width * 0.2f;
+					position.xMax = position.x + field_width * 0.5f;
 					_FetchLIDClassField();
-					var sel_idx = EditorGUI.Popup(position, -1, _displays);
-					if (-1 < sel_idx)
-						property.stringValue = _displays[sel_idx].Split(" | ")[0];
+					var compare = property.stringValue + " |";
+					var idx = Array.FindIndex(_displays, e => e.StartsWith(compare, StringComparison.Ordinal));
+					idx = EditorGUI.Popup(position, idx, _displays);
+					if (scope.changed)
+						property.stringValue = _displays[idx].Split(" | ")[0];
 
 					position.x = position.xMax;
-					position.xMax = position.x + field_width * 0.8f;
+					position.xMax = position.x + field_width * 0.5f;
 					EditorGUI.PropertyField(position, property, GUIContent.none);
 				}
 			}
