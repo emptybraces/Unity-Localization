@@ -11,7 +11,7 @@ namespace EmptyBraces.Localization.Editor
 		public override void OnInspectorGUI()
 		{
 			base.OnInspectorGUI();
-
+			EditorGUILayout.LabelField("Helper Menu:", EditorStyles.boldLabel);
 			var settings = target as Settings;
 			int error_no = 0;
 			foreach (var i in settings.SupportLanguageFontAssets)
@@ -62,6 +62,11 @@ namespace EmptyBraces.Localization.Editor
 				group = aas_settings.FindGroup(LocalizationManager.k_AddressablesGroupName);
 				var schema = group.GetSchema<BundledAssetGroupSchema>();
 				schema.BundleMode = BundledAssetGroupSchema.BundlePackingMode.PackTogetherByLabel;
+			}
+
+			if (GUILayout.Button("Create LID.cs"))
+			{
+				Menu.CreateLID();
 			}
 		}
 	}

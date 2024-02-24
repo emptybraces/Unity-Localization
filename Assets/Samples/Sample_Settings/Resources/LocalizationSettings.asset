@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27cdbf90c24ff4746a1a0dd7e89ad64b, type: 3}
   m_Name: LocalizationSettings
   m_EditorClassIdentifier: 
-  _localizeFileLocation: localization
-  SourceFileLocation: Samples/Sample_Scene
-  OutputDebugLog: 1
   DefaultLanguage: 22
+  _localizeFileLocation: localization
+  AutoGenerateLocalizeKeyFileLocation: Samples/Sample_Settings/Test
+  AutoGenerateLocalizeKeyFileNamespace: EmptyBraces.Localization
+  EnableDebugLog: 1
   SupportLanguages:
   - Language: 10
     Prefix: en

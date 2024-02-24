@@ -12,5 +12,5 @@ namespace EmptyBraces.Localization
 		public const string title_load = "title/load";
 		public const string title_settings = "title/settings";
 		public const string title_version = "title/version";
-}
+	}
 }

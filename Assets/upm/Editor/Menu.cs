@@ -28,18 +28,17 @@ namespace EmptyBraces.Localization.Editor
 		{
 			Debug.Log("CreateLID: Start");
 			var path_src = Path.Combine(Application.streamingAssetsPath, Settings.Instance.LocalizeFileLocation, $"{Settings.Instance.GetDefaultLaunguageId()}_word.txt");
-			var path_output_parent = Path.Combine(Application.dataPath, Settings.Instance.SourceFileLocation);
+			var path_output_parent = Path.Combine(Application.dataPath, Settings.Instance.AutoGenerateLocalizeKeyFileLocation);
 			var path_output = Path.Combine(path_output_parent, "LID.cs");
 			try
 			{
 				var lines = File.ReadAllLines(path_src);
 				var sb = new StringBuilder();
-				sb.Append(@"// Auto Generated
-namespace EmptyBraces.Localization
-{
-	public static class LID
-	{
-");
+				sb.AppendLine("// Auto Generated");
+				if (!string.IsNullOrEmpty(Settings.Instance.AutoGenerateLocalizeKeyFileNamespace))
+					sb.AppendLine($"namespace {Settings.Instance.AutoGenerateLocalizeKeyFileNamespace}\n{{");
+				sb.AppendLine("\tpublic static class LID\n\t{");
+
 				foreach (var line in lines)
 				{
 					// 3文字以下はあり得ない
@@ -51,7 +50,7 @@ namespace EmptyBraces.Localization
 					var idx = trimmed.IndexOfAny(new char[] { '\t', ' ' });
 					if (idx == -1)
 					{
-						if (Settings.Instance.OutputDebugLog)
+						if (Settings.Instance.EnableDebugLog)
 							Debug.Log($"Detect array elements. {line}");
 						continue;
 					}
@@ -59,8 +58,9 @@ namespace EmptyBraces.Localization
 					var var_name = key.Replace("/", "_");
 					sb.AppendLine($"\t\tpublic const string {var_name} = \"{key}\";");
 				}
-				sb.AppendLine("}");
-				sb.AppendLine("}");
+				sb.AppendLine("\t}");
+				if (!string.IsNullOrEmpty(Settings.Instance.AutoGenerateLocalizeKeyFileNamespace))
+					sb.AppendLine("}");
 				if (!Directory.Exists(path_output_parent))
 					Directory.CreateDirectory(path_output_parent);
 				File.WriteAllText(path_output, sb.ToString(), Encoding.UTF8);

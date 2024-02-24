@@ -123,7 +123,7 @@ namespace EmptyBraces.Localization
 						value = value_span.ToString();
 					}
 					// 格納
-					if (Settings.Instance.OutputDebugLog)
+					if (Settings.Instance.EnableDebugLog)
 						Debug.Log($"Add | K={last_key}, V={value}");
 					Data.Add(last_key, value);
 				}
@@ -138,7 +138,7 @@ namespace EmptyBraces.Localization
 			{
 				values.Insert(0, (string)Data[lastKey]); // 先頭のキーを配列の先頭に設定する。
 				Data[lastKey] = values.ToArray(); // 上書きする。
-				if (Settings.Instance.OutputDebugLog)
+				if (Settings.Instance.EnableDebugLog)
 					Debug.Log($"AddArray | K={lastKey}, V={string.Join(",", values)}");
 				values.Clear();
 			}

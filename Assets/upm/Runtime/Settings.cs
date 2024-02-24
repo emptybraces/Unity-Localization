@@ -4,11 +4,12 @@ namespace EmptyBraces.Localization
 {
 	public class Settings : ScriptableObject
 	{
+		public SystemLanguage DefaultLanguage = SystemLanguage.English;
 		[SerializeField] string _localizeFileLocation = "localization";
 		public string LocalizeFileLocation => Path.Combine(Application.streamingAssetsPath, _localizeFileLocation);
-		public string SourceFileLocation = "";
-		public bool OutputDebugLog = true;
-		public SystemLanguage DefaultLanguage = SystemLanguage.English;
+		public string AutoGenerateLocalizeKeyFileLocation = "";
+		public string AutoGenerateLocalizeKeyFileNamespace = "EmptyBraces.Localization";
+		public bool EnableDebugLog = true;
 		public SupportLanguage[] SupportLanguages;
 
 #if UNITY_EDITOR
