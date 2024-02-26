@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Assertions;
 namespace EmptyBraces.Localization
 {
 	public class Settings : ScriptableObject
@@ -18,7 +17,7 @@ namespace EmptyBraces.Localization
 		[System.Serializable]
 		public class FontAssetData
 		{
-			public TMPro.TMP_FontAsset MediateFontAsset;
+			public TMPro.TMP_FontAsset BaseFontAsset;
 			[Tooltip("Set the FontAsset in order of SupportLanguage listitem.")]
 #if UNITY_EDITOR
 			[SupportedLanguageArray] public TMPro.TMP_FontAsset[] ActualFontAssets;

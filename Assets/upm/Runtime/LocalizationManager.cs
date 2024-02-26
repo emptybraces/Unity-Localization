@@ -28,7 +28,7 @@ namespace EmptyBraces.Localization
 			for (int i = 0; i < Settings.Instance.SupportLanguageFontAssets.Length; i++)
 			{
 				var item = Settings.Instance.SupportLanguageFontAssets[i];
-				if (item.MediateFontAsset == fontAsset)
+				if (item.BaseFontAsset == fontAsset)
 				{
 					handle = item.ActualFontAssetRefs[lan_idx].LoadAssetAsync<TMP_FontAsset>();
 					_cacheAASHandles[fontAsset.GetInstanceID()] = handle;

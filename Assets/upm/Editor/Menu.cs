@@ -1,13 +1,16 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using UnityEditor;
+using UnityEditor.Search;
 using UnityEngine;
 namespace EmptyBraces.Localization.Editor
 {
 	public static class Menu
 	{
-		[MenuItem("Assets/Create/Localization/Create Localization Settings")]
+		const string k_MenuPath = "Assets/Localization";
+		[MenuItem(k_MenuPath + "/Create Localization Settings")]
 		public static void MakeSettingsAssetIfNeeded()
 		{
 			var asset = Resources.Load<ScriptableObject>(LocalizationManager.k_SettingsFileName);
@@ -23,7 +26,7 @@ namespace EmptyBraces.Localization.Editor
 			EditorGUIUtility.PingObject(asset);
 		}
 
-		[MenuItem("Assets/Create/Localization/Create LID.cs", false)]
+		[MenuItem(k_MenuPath + "/Create LID.cs", false)]
 		public static void CreateLID()
 		{
 			Debug.Log("CreateLID: Start");
@@ -73,10 +76,30 @@ namespace EmptyBraces.Localization.Editor
 			}
 			Debug.Log("CreateLID: Completed.");
 		}
-		[MenuItem("Assets/Localization/Create LID.cs", true)]
+		[MenuItem(k_MenuPath + "/Create LID.cs", true)]
 		public static bool CreateLIDValidate()
 		{
 			return null != Resources.Load<Settings>(LocalizationManager.k_SettingsFileName);
+		}
+
+		[MenuItem(k_MenuPath + "/Dump TMP_Text without base font registered in Settings.")]
+		static void _DumpTMPTextWithoutBaseFont()
+		{
+			Debug.Log("Start");
+			var base_fonts = Settings.Instance.SupportLanguageFontAssets.Select(e => e.BaseFontAsset).ToArray();
+			var is_detect = false;
+			foreach (var tmp in GameObject.FindObjectsByType<TMPro.TMP_Text>(FindObjectsSortMode.None))
+			{
+				if (!base_fonts.Contains(tmp.font))
+				{
+					if (!is_detect && (is_detect = true))
+						Debug.LogWarning("Detects!");
+					Debug.LogWarning(SearchUtils.GetHierarchyPath(tmp.gameObject, true), tmp.gameObject);
+				}
+			}
+			if (!is_detect)
+				Debug.Log("Nothing Detects.");
+			Debug.Log("Finish");
 		}
 
 		public class Importer : AssetPostprocessor
