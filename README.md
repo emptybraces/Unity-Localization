@@ -11,7 +11,7 @@ https://github.com/emptybraces/Unity_Localization.git?path=Assets/upm
 ![localiation](https://github.com/emptybraces/Unity_Localization/assets/1441835/d76783a1-0493-4049-bad3-215ae9b4eccb)
 
 # Structure
-This code accomplishes the language switching by dynamically replacing the Fallback FontAsset prepared for each language. Create an intermediate FontAsset for each theme(system, dialogues, etc) you want to use. This FontAsset is only intermediate data for the fallback, so the atlas textures should empty. Or make ASCII code if you want to use the same font for all languages. Materials are created for this intermediate font data and are shared by all Fallback FontAsset. Then, using the TmproLocalize component, the TMP_FontAsset for each language can be loaded into the Fallback FontAsset to display the characters.
+This code accomplishes the language switching by dynamically replacing the Fallback FontAsset prepared for each language. Create an intermediate FontAsset for each theme(system, dialogues, etc) you want to use. This FontAsset is only intermediate data for the fallback, so the atlas textures should empty. Or if you want to use the same font for all languages for alphabets and numbers, bake them in ASCII code. Materials are created for this intermediate font data and are shared by all Fallback FontAsset. Then, using the TmproLocalize component, the TMP_FontAsset for each language can be loaded into the Fallback FontAsset to display the characters.
 
 # Setup
 - Configuration file must be created in "Assets/Create/Localization/Create Localization Settings".
