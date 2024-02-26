@@ -14,17 +14,17 @@ namespace EmptyBraces.Localization
 		{
 			if (LocalizationManager.CurrentLoadedLaunguage == language)
 				return true;
-			var lan_id = Settings.Instance.GetId(language);
-			Assert.IsNotNull(lan_id, "unsupported language: " + language);
-			var path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_id}_word.txt");
+			var lan_prefix = Settings.Instance.GetPrefix(language);
+			Assert.IsNotNull(lan_prefix, "unsupported language: " + language);
+			var path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_prefix}_word.txt");
 			var is_success = LoadFromFile(path);
 			if (!is_success)
 			{
 				if (Application.systemLanguage != language)
 				{
-					lan_id = Settings.Instance.GetId(Application.systemLanguage);
-					Debug.LogWarning($"{path} file loading failed, retry with OS language. {lan_id}");
-					path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_id}_word.txt");
+					lan_prefix = Settings.Instance.GetPrefix(Application.systemLanguage);
+					Debug.LogWarning($"{path} file loading failed, retry with OS language. {lan_prefix}");
+					path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_prefix}_word.txt");
 					is_success = LoadFromFile(path);
 				}
 				if (!is_success)

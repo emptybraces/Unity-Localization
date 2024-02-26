@@ -63,7 +63,7 @@ namespace EmptyBraces.Localization
 			}
 			return -1;
 		}
-		public string GetId(SystemLanguage lan)
+		public string GetPrefix(SystemLanguage lan)
 		{
 			foreach (var i in SupportLanguages)
 				if (i.Language == lan)

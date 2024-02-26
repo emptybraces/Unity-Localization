@@ -20,7 +20,7 @@ namespace EmptyBraces.Localization
 				return op.Status == AsyncOperationStatus.Succeeded ? op.Result : null;
 			language ??= CurrentLoadedLaunguage;
 			var lan_idx = Settings.Instance.GetIndex(language.Value);
-			Assert.IsFalse(lan_idx == -1);
+			Assert.IsFalse(lan_idx == -1, $"{language.Value} is not supported: ");
 			if (Settings.Instance.EnableDebugLog)
 				Debug.Log($"Load to cache: {fontAsset} of {language}");
 			// var handle = Addressables.LoadAssetsAsync<TMP_FontAsset>((IEnumerable)new object[] { fontName, k_AddressablesLabelPrefix + lanId }, null, Addressables.MergeMode.Intersection);
