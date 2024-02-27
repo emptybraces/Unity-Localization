@@ -46,10 +46,8 @@ namespace EmptyBraces.Localization
 		{
 			foreach (var i in _cacheAASHandles.Values)
 			{
-				Debug.Log(i.IsValid());
 				if (i.IsValid())
 					Addressables.Release(i);
-				Debug.Log(i.IsValid());
 			}
 			_cacheAASHandles.Clear();
 		}
