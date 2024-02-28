@@ -27,3 +27,6 @@ This code accomplishes the language switching by dynamically replacing the Fallb
 - AssetPostprocessor is implemented, and the word list file in the folder specified in Settings will automatically create LID.cs when detect to updated. It can also be run manually from "Assets/Localization/Create LID.cs".
 
 ![image](https://github.com/emptybraces/Unity_Localization/assets/1441835/e3f33611-fa33-45ca-9456-8923b1b0ad80)
+
+- Sample setup ready, but there is a little work to be done after importing.
+![image](https://github.com/emptybraces/Unity_Localization/assets/1441835/c8e29091-fdcf-4f08-b3ea-cd06a8cf586b)
