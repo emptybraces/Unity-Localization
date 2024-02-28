@@ -14,13 +14,15 @@ This code accomplishes the language switching by dynamically replacing the Fallb
 
 # Setup
 - Configuration file must be created in "Assets/Localization/Create Localization Settings".
-- From the configuration file, set the languages to be supported, file prefixes for word lists, etc. Next, set the font data (TMP_FontAsset) for each language and press the button below to register it in Addressables.
+- In configuration, set the languages to be supported and file prefix for word lists. Next, set the TMP_FontAsset for each language and press the button below to register it in Addressables.
 
-![image](https://github.com/emptybraces/Unity_Localization/assets/1441835/20063736-7528-4e2c-b0fe-90a46a4dd7dd)
+![image](https://github.com/emptybraces/Unity_Localization/assets/1441835/964b3dcd-68ec-47f8-adc0-e4d5593f9893)
 
-- Place a text file that defines the word list for each language to be supported in the StreamingAssets folder. Keys and values are separated by spaces or tabs. The key can also have an array value that must begin with a space or tab.
+- Place a text file in the StreamingAssets folder, these files defining wordlist for languages you set above. File name format is "[PREFIX]_word.txt".
+- Keys and values are separated by spaces or tabs. The key can also have an array value that must begin with a space or tab.
+  
+![files](https://github.com/emptybraces/Unity_Localization/assets/1441835/daa5a4b9-7a0d-4883-b39c-cf2e9604704a)
 
-![image](https://github.com/emptybraces/Unity_Localization/assets/1441835/cbe15108-09d1-48a7-af7e-dcd328c4e83d)
 
 - AssetPostprocessor is implemented, and the word list file in the folder specified in Settings will automatically create LID.cs when detect to updated. It can also be run manually from "Assets/Localization/Create LID.cs".
 
