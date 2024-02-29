@@ -51,6 +51,8 @@ namespace EmptyBraces.Localization.Editor
 					for (int i = 0; i < item.ActualFontAssets.Length; ++i)
 					{
 						var j = item.ActualFontAssets[i];
+						// AssetRefrenceを埋める
+						item.ActualFontAssetRefs[i].SetEditorAsset(j);
 						if (j != null)
 						{
 							var entry = j.SetAddressableGroup(LocalizationManager.k_AddressablesGroupName);
@@ -59,8 +61,6 @@ namespace EmptyBraces.Localization.Editor
 							var label = LocalizationManager.k_AddressablesLabelPrefix + settings.SupportLanguages[i].Prefix;
 							aas_settings.AddLabel(label);
 							entry.SetLabel(label, true);
-							// AssetRefrenceを埋める
-							item.ActualFontAssetRefs[i].SetEditorAsset(j);
 						}
 					}
 				}

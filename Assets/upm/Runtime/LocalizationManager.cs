@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -30,11 +31,17 @@ namespace EmptyBraces.Localization
 				var item = Settings.Instance.SupportLanguageFontAssets[i];
 				if (item.BaseFontAsset == fontAsset)
 				{
-					handle = item.ActualFontAssetRefs[lan_idx].LoadAssetAsync<TMP_FontAsset>();
-					_cacheAASHandles[fontAsset.GetInstanceID()] = handle;
-					handle.WaitForCompletion();
-					// Debug.Log($"{lan_idx}, {item.ActualFontAssets[lan_idx]}, {handle.Result}");
-					return handle.Status == AsyncOperationStatus.Succeeded ? handle.Result : null;
+					// nullがセットされていたら
+					if (item.ActualFontAssetRefs[lan_idx].RuntimeKeyIsValid())
+					{
+						handle = item.ActualFontAssetRefs[lan_idx].LoadAssetAsync<TMP_FontAsset>();
+						_cacheAASHandles[fontAsset.GetInstanceID()] = handle;
+						handle.WaitForCompletion();
+						if (Settings.Instance.EnableDebugLog)
+							Debug.Log($"{lan_idx}, {handle.Result}");
+						return handle.Status == AsyncOperationStatus.Succeeded ? handle.Result : null;
+					}
+					return null;
 				}
 			}
 			if (Settings.Instance.EnableDebugLog)
