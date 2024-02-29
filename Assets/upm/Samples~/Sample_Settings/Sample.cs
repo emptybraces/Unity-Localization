@@ -36,7 +36,7 @@ namespace EmptyBraces
 		public void OnLoadLanguage(SystemLanguage lan)
 		{
 			Word.LoadWordFile(lan);
-			foreach (var i in FindObjectsByType<TMProLocalize>(FindObjectsSortMode.None))
+			foreach (var i in FindObjectsByType<TMProLocalize>(FindObjectsInactive.Include, FindObjectsSortMode.None))
 				i.RefreshText();
 		}
 	}
