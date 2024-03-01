@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.Assertions;
 
-namespace EmptyBraces.Localization
+namespace Emptybraces.Localization
 {
 	public static class Word
 	{

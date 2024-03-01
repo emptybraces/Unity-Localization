@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings.GroupSchemas;
 using UnityEngine;
-namespace EmptyBraces.Localization.Editor
+namespace Emptybraces.Localization.Editor
 {
 	[CustomEditor(typeof(Settings))]
 	public class SettingsInspector : UnityEditor.Editor

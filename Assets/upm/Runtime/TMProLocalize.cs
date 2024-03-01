@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-namespace EmptyBraces.Localization
+namespace Emptybraces.Localization
 {
 	[RequireComponent(typeof(TMPro.TMP_Text))]
 	public class TMProLocalize : MonoBehaviour

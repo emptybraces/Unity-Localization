@@ -1,5 +1,5 @@
 ﻿// Auto Generated
-namespace EmptyBraces.Localization
+namespace Emptybraces.Localization
 {
 	public static class LID
 	{

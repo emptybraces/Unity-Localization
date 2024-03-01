@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-namespace EmptyBraces.Localization.Editor
+namespace Emptybraces.Localization.Editor
 {
 	[CustomEditor(typeof(TMProLocalize))]
 	public class TMProLocalizeInspector : UnityEditor.Editor

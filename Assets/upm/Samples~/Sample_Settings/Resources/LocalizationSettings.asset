@@ -15,7 +15,7 @@ MonoBehaviour:
   DefaultLanguage: 22
   _localizeFileLocation: localization
   AutoGenerateLocalizeKeyFileLocation: Samples/Sample_Settings
-  AutoGenerateLocalizeKeyFileNamespace: EmptyBraces.Localization
+  AutoGenerateLocalizeKeyFileNamespace: Emptybraces.Localization
   EnableDebugLog: 1
   SupportLanguages:
   - Language: 10

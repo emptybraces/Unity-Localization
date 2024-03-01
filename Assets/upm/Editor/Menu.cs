@@ -5,7 +5,7 @@ using System.Text;
 using UnityEditor;
 using UnityEditor.Search;
 using UnityEngine;
-namespace EmptyBraces.Localization.Editor
+namespace Emptybraces.Localization.Editor
 {
 	public static class Menu
 	{

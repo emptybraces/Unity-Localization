@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Assertions;
 using UnityEngine.ResourceManagement.AsyncOperations;
-namespace EmptyBraces.Localization
+namespace Emptybraces.Localization
 {
 	public static class LocalizationManager
 	{

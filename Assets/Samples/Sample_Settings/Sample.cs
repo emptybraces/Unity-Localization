@@ -1,7 +1,7 @@
-using EmptyBraces.Localization;
+using Emptybraces.Localization;
 using UnityEngine;
 using UnityEngine.UI;
-namespace EmptyBraces
+namespace Emptybraces
 {
 	public class Sample : MonoBehaviour
 	{

@@ -5,7 +5,7 @@ using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets.Settings.GroupSchemas;
 
-namespace EmptyBraces.Localization.Editor
+namespace Emptybraces.Localization.Editor
 {
 	public static class Extensions
 	{

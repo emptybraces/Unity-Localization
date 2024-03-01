@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-namespace EmptyBraces.Localization
+namespace Emptybraces.Localization
 {
 	public class Settings : ScriptableObject
 	{

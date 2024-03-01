@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-namespace EmptyBraces.Localization
+namespace Emptybraces.Localization
 {
 	[System.Diagnostics.Conditional("UNITY_EDITOR")]
 	public class SupportLanguagePopupAttribute : PropertyAttribute { }
