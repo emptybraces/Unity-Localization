@@ -47,6 +47,17 @@ namespace EmptyBraces.Localization.Editor
 				tmpro_localize.RefreshText();
 				EditorApplication.QueuePlayerLoopUpdate();
 			}
+			if (GUILayout.Button("Load Next Language(Whole Scene)"))
+			{
+				_ResetWithoutText();
+				var idx = Array.FindIndex(Settings.Instance.SupportLanguages, e => e.Language == _language);
+				idx = (int)Mathf.Repeat(idx + 1, Settings.Instance.SupportLanguages.Length);
+				_language = Settings.Instance.SupportLanguages[idx].Language;
+				Word.LoadWordFile(_language);
+				foreach (var i in FindObjectsByType<TMProLocalize>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+					i.RefreshText();
+				EditorApplication.QueuePlayerLoopUpdate();
+			}
 			if (GUILayout.Button("Reset"))
 			{
 				_Reset();
