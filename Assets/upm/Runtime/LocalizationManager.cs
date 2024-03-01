@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -58,6 +57,7 @@ namespace Emptybraces.Localization
 			}
 			_cacheAASHandles.Clear();
 		}
+		
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
 		static void _DomainReset()
 		{

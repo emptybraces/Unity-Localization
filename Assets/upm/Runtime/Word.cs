@@ -10,7 +10,7 @@ namespace Emptybraces.Localization
 	{
 		public static Dictionary<string, object> Data;
 		static List<string> _tmpStringList;
-		public static bool LoadWordFile(SystemLanguage language)
+		public static bool LoadWordFile(SystemLanguage language, bool isLoadAllNewFont = true)
 		{
 			if (LocalizationManager.CurrentLoadedLaunguage == language)
 				return true;
@@ -23,18 +23,26 @@ namespace Emptybraces.Localization
 				if (Application.systemLanguage != language)
 				{
 					lan_prefix = Settings.Instance.GetPrefix(Application.systemLanguage);
-					Debug.LogWarning($"{path} file loading failed, retry with OS language. {lan_prefix}");
+					Debug.LogWarning($"Failed to load {path}, retry with OS language. {lan_prefix}");
 					path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_prefix}_word.txt");
 					is_success = LoadFromFile(path);
 				}
 				if (!is_success)
 				{
-					Debug.LogError($"{path} file loading failed.");
+					Debug.LogError($"Failed to load {path}.");
 					return false;
 				}
 			}
 			LocalizationManager.CurrentLoadedLaunguage = language;
+			// 古いフォントを解放した後で新しいフォントを全てロードする
 			LocalizationManager.Release();
+			if (isLoadAllNewFont)
+			{
+				foreach (var i in Settings.Instance.SupportLanguageFontAssets)
+				{
+					LocalizationManager.LoadFontAssetIfNeeded(i.BaseFontAsset);
+				}
+			}
 			return true;
 		}
 		public static bool LoadFromFile(string path)
