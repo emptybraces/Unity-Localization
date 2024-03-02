@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEditor;
 using UnityEngine;
 namespace Emptybraces.Localization.Editor
@@ -53,9 +55,24 @@ namespace Emptybraces.Localization.Editor
 				var idx = Array.FindIndex(Settings.Instance.SupportLanguages, e => e.Language == _language);
 				idx = (int)Mathf.Repeat(idx + 1, Settings.Instance.SupportLanguages.Length);
 				_language = Settings.Instance.SupportLanguages[idx].Language;
+				var static_tm = new List<TMPro.TMP_Text>();
+				foreach (var i in FindObjectsByType<TMPro.TMP_Text>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+				{
+					if (!i.TryGetComponent<TMProLocalize>(out _))
+					{
+						var key = Word.Data.FirstOrDefault(e => e.Value as string == i.text).Key;
+						if (null != key)
+						{
+							static_tm.Add(i);
+							i.text = key;
+						}
+					}
+				}
 				Word.LoadWordFile(_language);
 				foreach (var i in FindObjectsByType<TMProLocalize>(FindObjectsInactive.Include, FindObjectsSortMode.None))
 					i.RefreshText();
+				foreach (var i in static_tm)
+					i.text = Word.Get(i.text);
 				EditorApplication.QueuePlayerLoopUpdate();
 			}
 			if (GUILayout.Button("Reset"))
