@@ -88,7 +88,7 @@ namespace Emptybraces.Localization.Editor
 			Debug.Log("Start");
 			var base_fonts = Settings.Instance.SupportLanguageFontAssets.Select(e => e.BaseFontAsset).ToArray();
 			var is_detect = false;
-			foreach (var tmp in GameObject.FindObjectsByType<TMPro.TMP_Text>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+			foreach (var tmp in Extensions.FindObjectsByType<TMPro.TMP_Text>(FindObjectsInactive.Include))
 			{
 				if (!base_fonts.Contains(tmp.font))
 				{

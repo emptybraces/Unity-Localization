@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets.Settings.GroupSchemas;
+using UnityEditor.SceneManagement;
 
 namespace Emptybraces.Localization.Editor
 {
@@ -30,6 +31,14 @@ namespace Emptybraces.Localization.Editor
 				return e;
 			}
 			return null;
+		}
+
+		public static T[] FindObjectsByType<T>(FindObjectsInactive findObjectsInactive = FindObjectsInactive.Exclude, FindObjectsSortMode findObjectsSortMode = FindObjectsSortMode.None) where T : Component
+		{
+			if (PrefabStageUtility.GetCurrentPrefabStage() != null)
+				return PrefabStageUtility.GetCurrentPrefabStage().FindComponentsOfType<T>();
+			else
+				return GameObject.FindObjectsByType<T>(findObjectsInactive, findObjectsSortMode);
 		}
 	}
 }
