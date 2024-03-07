@@ -32,8 +32,8 @@ namespace Emptybraces
 
 		void Start()
 		{
-			_dynamicText[0].text = Word.Get("com/yes");
-			_dynamicText[1].text = Word.GetArray("status/params")[2];
+			_dynamicText[0].text = Word.Get(LID.com_yes);
+			_dynamicText[1].text = Word.GetArray(LID.status_params)[2];
 			if (_dynamicText[2].TryGetComponent<TMProLocalize>(out var c) || (c = _dynamicText[2].gameObject.AddComponent<TMProLocalize>()))
 			{
 				c.SetDynamicMessage(() => Word.Get(LID.title_version, _version));
