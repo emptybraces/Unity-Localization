@@ -33,7 +33,7 @@ namespace Emptybraces.Localization.Editor
 				// _language = (SystemLanguage)EditorGUILayout.EnumPopup("Load Language", _language);
 				if (GUILayout.Button("Load"))
 				{
-					_ResetWithoutText();
+					_ResetWithRetainingText();
 					Word.LoadWordFile(_language);
 					tmpro_localize.RefreshText();
 					EditorApplication.QueuePlayerLoopUpdate();
@@ -41,38 +41,46 @@ namespace Emptybraces.Localization.Editor
 			}
 			if (GUILayout.Button("Load Next Language"))
 			{
-				_ResetWithoutText();
-				var idx = Array.FindIndex(Settings.Instance.SupportLanguages, e => e.Language == _language);
-				idx = (int)Mathf.Repeat(idx + 1, Settings.Instance.SupportLanguages.Length);
-				_language = Settings.Instance.SupportLanguages[idx].Language;
+				_ResetWithRetainingText();
+				_language = _GetNextSupportedLanguage();
 				Word.LoadWordFile(_language);
 				tmpro_localize.RefreshText();
 				EditorApplication.QueuePlayerLoopUpdate();
 			}
 			if (GUILayout.Button("Load Next Language(Whole Scene)"))
 			{
-				_ResetWithoutText();
-				var idx = Array.FindIndex(Settings.Instance.SupportLanguages, e => e.Language == _language);
-				idx = (int)Mathf.Repeat(idx + 1, Settings.Instance.SupportLanguages.Length);
-				_language = Settings.Instance.SupportLanguages[idx].Language;
-				var static_tm = new List<TMPro.TMP_Text>();
+				_ResetWithRetainingText();
+				_language = _GetNextSupportedLanguage();
+				var static_tm = new List<(TMPro.TMP_Text tm, int idx)>();
 				foreach (var i in FindObjectsByType<TMPro.TMP_Text>(FindObjectsInactive.Include, FindObjectsSortMode.None))
 				{
 					if (!i.TryGetComponent<TMProLocalize>(out _))
 					{
-						var key = Word.Data.FirstOrDefault(e => e.Value as string == i.text).Key;
-						if (null != key)
+						foreach (var kvp in Word.Data)
 						{
-							static_tm.Add(i);
-							i.text = key;
+							if (kvp.Value is string value && value == i.text)
+							{
+								static_tm.Add((i, -1));
+								i.text = kvp.Key;
+							}
+							else if (kvp.Value is string[] values && values.Contains(i.text))
+							{
+								static_tm.Add((i, Array.IndexOf(values, i.text)));
+								i.text = kvp.Key;
+							}
 						}
 					}
 				}
 				Word.LoadWordFile(_language);
 				foreach (var i in FindObjectsByType<TMProLocalize>(FindObjectsInactive.Include, FindObjectsSortMode.None))
 					i.RefreshText();
-				foreach (var i in static_tm)
-					i.text = Word.Get(i.text);
+				foreach (var (tm, idx) in static_tm)
+				{
+					if (idx == -1)
+						tm.text = Word.Get(tm.text);
+					else
+						tm.text = Word.GetArray(tm.text)[idx];
+				}
 				EditorApplication.QueuePlayerLoopUpdate();
 			}
 			if (GUILayout.Button("Reset"))
@@ -90,7 +98,7 @@ namespace Emptybraces.Localization.Editor
 				DestroyImmediate(i.gameObject);
 			}
 		}
-		void _ResetWithoutText()
+		void _ResetWithRetainingText()
 		{
 			var tmpro_localize = (TMProLocalize)target;
 			var c = tmpro_localize.GetComponent<TMPro.TMP_Text>();
@@ -99,6 +107,12 @@ namespace Emptybraces.Localization.Editor
 			foreach (var i in tmpro_localize.GetComponentsInChildren<TMPro.TMP_SubMeshUI>())
 				DestroyImmediate(i.gameObject);
 			c.text = text;
+		}
+		SystemLanguage _GetNextSupportedLanguage()
+		{
+			var idx = Array.FindIndex(Settings.Instance.SupportLanguages, e => e.Language == _language);
+			idx = (int)Mathf.Repeat(idx + 1, Settings.Instance.SupportLanguages.Length);
+			return Settings.Instance.SupportLanguages[idx].Language;
 		}
 	}
 }

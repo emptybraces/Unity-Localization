@@ -1,12 +1,13 @@
 using Emptybraces.Localization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Emptybraces
 {
 	public class Sample : MonoBehaviour
 	{
-		[SerializeField] TMProLocalize _tmVersion;
 		[SerializeField] Toggle[] _languageToggles;
+		[SerializeField] TMP_Text[] _dynamicText;
 		[SerializeField] string _version = "1.0.0";
 		void Awake()
 		{
@@ -18,7 +19,8 @@ namespace Emptybraces
 				{
 					if (isOn)
 					{
-						OnLoadLanguage(icap switch {
+						OnLoadLanguage(icap switch
+						{
 							0 => SystemLanguage.English,
 							1 => SystemLanguage.Japanese,
 							_ => SystemLanguage.ChineseSimplified,
@@ -30,7 +32,12 @@ namespace Emptybraces
 
 		void Start()
 		{
-			_tmVersion.SetDynamicMessage(() => Word.Get(LID.title_version, _version));
+			_dynamicText[0].text = Word.Get("com/yes");
+			_dynamicText[1].text = Word.GetArray("status/params")[2];
+			if (_dynamicText[2].TryGetComponent<TMProLocalize>(out var c) || (c = _dynamicText[2].gameObject.AddComponent<TMProLocalize>()))
+			{
+				c.SetDynamicMessage(() => Word.Get(LID.title_version, _version));
+			}
 		}
 
 		public void OnLoadLanguage(SystemLanguage lan)

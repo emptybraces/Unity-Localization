@@ -109,7 +109,10 @@ namespace Emptybraces.Localization.Editor
 			try
 			{
 				if (Settings.Instance != null)
-					Word.LoadWordFile(Settings.Instance.DefaultLanguage);
+				{
+					if (LocalizationManager.CurrentLoadedLaunguage == SystemLanguage.Unknown)
+						Word.LoadWordFile(Settings.Instance.DefaultLanguage);
+				}
 				else
 				{
 					Debug.LogWarning("Not found LocalizationSettings, please create it.");
@@ -123,7 +126,6 @@ namespace Emptybraces.Localization.Editor
 			}
 			try
 			{
-
 				Type type = null;
 				var assembly = Assembly.Load("Assembly-CSharp");
 				if (assembly != null)
