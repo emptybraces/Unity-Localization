@@ -47,6 +47,7 @@ namespace Emptybraces.Localization.Editor
 				tmpro_localize.RefreshText();
 				EditorApplication.QueuePlayerLoopUpdate();
 			}
+			// TMProLocalizeを持たないテキストも内容から辞書に問い合わせて更新する。
 			if (GUILayout.Button("Load Next Language(Whole Scene)"))
 			{
 				_ResetWithRetainingText();
@@ -56,6 +57,8 @@ namespace Emptybraces.Localization.Editor
 				{
 					if (!i.TryGetComponent<TMProLocalize>(out _))
 					{
+						if (string.IsNullOrEmpty(i.text))
+							continue;
 						foreach (var kvp in Word.Data)
 						{
 							if (kvp.Value is string value && value == i.text)
