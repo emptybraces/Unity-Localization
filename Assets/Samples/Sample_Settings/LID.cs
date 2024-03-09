@@ -8,6 +8,7 @@ namespace Emptybraces.Localization
 		public const string com_skip = "com/skip";
 		public const string item_get = "item/get";
 		public const string status_params = "status/params";
+		public const string test_array = "test_array";
 		public const string title_start = "title/start";
 		public const string title_load = "title/load";
 		public const string title_settings = "title/settings";

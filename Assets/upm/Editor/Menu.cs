@@ -44,19 +44,21 @@ namespace Emptybraces.Localization.Editor
 
 				foreach (var line in lines)
 				{
-					// 3文字以下はあり得ない
-					var trimmed = line.Trim();
-					if (trimmed.Length < 3)
+					// コメント
+					if (line.StartsWith("/", StringComparison.Ordinal))
 						continue;
-					if (trimmed.StartsWith("/", StringComparison.Ordinal))
-						continue;
-					var idx = trimmed.IndexOfAny(new char[] { '\t', ' ' });
-					if (idx == -1)
+					// 配列
+					if (line.StartsWith(" ", StringComparison.Ordinal) || line.StartsWith("\t", StringComparison.Ordinal) || line.StartsWith("　", StringComparison.Ordinal))
 					{
 						if (Settings.Instance.EnableDebugLog)
 							Debug.Log($"Detect array elements. {line}");
 						continue;
 					}
+					// キーとセパレータとバリュー合わせて、3文字以下はあり得ない
+					var trimmed = line.Trim();
+					if (trimmed.Length < 3)
+						continue;
+					var idx = trimmed.IndexOfAny(new char[] { '\t', ' ', '　'});
 					var key = trimmed[..idx];
 					var var_name = key.Replace("/", "_");
 					sb.AppendLine($"\t\tpublic const string {var_name} = \"{key}\";");

@@ -1,22 +1,22 @@
 //--------------------------------------------------------------------		
 // Common	
 //--------------------------------------------------------------------		
-com/yes					Yes
-com/no					No
-com/skip				Skip?
+com/yes				Yes
+com/no				No
+com/skip			Skip?
 //--------------------------------------------------------------------		
 // Item
 //--------------------------------------------------------------------		
-item/get				<b>Obtained {0}!</b>
+item/get			<b>Obtained {0}!</b>
 //--------------------------------------------------------------------		
 // Status
 //--------------------------------------------------------------------		
-status/params			<cspace=0.2em>ATK</cspace>
-						<cspace=0.2em>DEF</cspace>
-						<cspace=0.2em>MAG</cspace>
+status/params		<cspace=0.2em>ATK</cspace>
+ 					<cspace=0.2em>DEF </cspace>
+					<cspace=0.2em>MAG</cspace>
 
 
-title/start				Start
-title/load				Load
+title/start			Start
+title/load			Load
 title/settings			Settings
-title/version			version{0}
+title/version			version {0}
