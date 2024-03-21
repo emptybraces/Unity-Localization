@@ -25,7 +25,7 @@ MonoBehaviour:
   - Language: 40
     Prefix: sc
   - Language: 41
-    Prefix: sc
+    Prefix: tc
   SupportLanguageFontAssets:
   - BaseFontAsset: {fileID: 11400000, guid: ee01b68cf3d1e604b942012975d905c4, type: 2}
     ActualFontAssets:

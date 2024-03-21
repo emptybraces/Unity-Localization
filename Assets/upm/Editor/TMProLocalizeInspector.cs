@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using UnityEditor;
 using UnityEngine;
 namespace Emptybraces.Localization.Editor
@@ -22,6 +21,16 @@ namespace Emptybraces.Localization.Editor
 		public override void OnInspectorGUI()
 		{
 			base.OnInspectorGUI();
+			if (Settings.Instance == null)
+			{
+				EditorGUILayout.HelpBox("Please make the Localization settings asset. See in menu 'Assets/Localization//Create Localization Settings'", MessageType.Warning);
+				return;
+			}
+			if (Settings.Instance.SupportLanguages.Length == 0)
+			{
+				EditorGUILayout.HelpBox("Please make the SupportLanguages in Localization settings asset.", MessageType.Warning);
+				return;
+			}
 			GUILayout.Space(10);
 			var tmpro_localize = (TMProLocalize)target;
 			using (var h = new GUILayout.HorizontalScope())
@@ -30,7 +39,6 @@ namespace Emptybraces.Localization.Editor
 				int idx = Mathf.Max(0, Array.IndexOf(displays, _language));
 				idx = EditorGUILayout.Popup(idx, displays.Select(e => e.ToString()).ToArray());
 				_language = displays[idx];
-				// _language = (SystemLanguage)EditorGUILayout.EnumPopup("Load Language", _language);
 				if (GUILayout.Button("Load"))
 				{
 					_ResetWithRetainingText();

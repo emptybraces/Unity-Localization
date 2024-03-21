@@ -10,15 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: Duplicate Asset Isolation
   m_EditorClassIdentifier: 
-  m_GroupName: Default Local Group
+  m_GroupName: Duplicate Asset Isolation
   m_Data:
     m_SerializedData: []
-  m_GUID: b68737acf20556b40bd07ad407a08fb2
+  m_GUID: ce28e5148063c7146ab728574f566969
   m_SerializeEntries:
-  - m_GUID: 43a9531426627b348a74cb32bb4aff01
-    m_Address: Assets/Samples/Sample_Settings/dynamic_texts.prefab
+  - m_GUID: 68e6db2ebdc24f95958faec2be5558d6
+    m_Address: Assets/TextMesh Pro/Shaders/TMP_SDF.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe393ace9b354375a9cb14cdbbc28be4
+    m_Address: Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -26,5 +31,5 @@ MonoBehaviour:
   m_Settings: {fileID: 11400000, guid: 8baa4fcd78933614095db9c82786d5c3, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 46b487e9f4293604caac7ae015f30a61, type: 2}
-    - {fileID: 11400000, guid: 811b777c875760a4d80434c30d0ff758, type: 2}
+    - {fileID: 11400000, guid: 267f320ec5865ed4dba929fa0f6ca8af, type: 2}
+    - {fileID: 11400000, guid: a3db02fc7a0c1c0429fa71f8d2721dee, type: 2}

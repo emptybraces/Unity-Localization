@@ -23,7 +23,7 @@ namespace Emptybraces.Localization
 				_fontAssets.Add(font);
 				Application.quitting += () =>
 				{
-					Debug.Log($"Clear font fallback list. {font}");
+					Debug.Log($"[LocalizationManager] Clear font fallback list. {font}");
 					font.fallbackFontAssetTable.Clear();
 				};
 

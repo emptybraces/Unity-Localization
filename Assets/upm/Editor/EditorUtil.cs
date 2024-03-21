@@ -35,8 +35,8 @@ namespace Emptybraces.Localization.Editor
 
 		public static T[] FindObjectsByType<T>(FindObjectsInactive findObjectsInactive = FindObjectsInactive.Exclude, FindObjectsSortMode findObjectsSortMode = FindObjectsSortMode.None) where T : Component
 		{
-			if (PrefabStageUtility.GetCurrentPrefabStage() != null)
-				return PrefabStageUtility.GetCurrentPrefabStage().FindComponentsOfType<T>();
+			if (PrefabStageUtility.GetCurrentPrefabStage() is PrefabStage stage)
+				return stage.FindComponentsOfType<T>();
 			else
 				return GameObject.FindObjectsByType<T>(findObjectsInactive, findObjectsSortMode);
 		}

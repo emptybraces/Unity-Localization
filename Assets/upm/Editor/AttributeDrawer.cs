@@ -115,14 +115,14 @@ namespace Emptybraces.Localization.Editor
 				}
 				else
 				{
-					Debug.LogWarning("Not found LocalizationSettings, please create it.");
-					_displays = new string[1] { "Not found LocalizationSettings, please create it." };
+					Debug.LogWarning("[LocalizationManager] Not found LocalizationSettings, Please create it first.");
+					_displays = new string[1] { "Not found LocalizationSettings, Please create it first." };
+					return;
 				}
 			}
 			catch (Exception e)
 			{
 				Debug.LogError(e.Message);
-				_displays = new string[1] { "Exception orrured, see console." };
 			}
 			try
 			{
@@ -135,8 +135,9 @@ namespace Emptybraces.Localization.Editor
 					type = assembly.GetType(typename);
 					if (type == null)
 					{
-						Debug.LogWarning("Not found Lid.cs, please create it.");
-						_displays = new string[1] { "Not found Lid.cs, please create it." };
+						Debug.LogWarning("[LocalizationManager] Not found Lid.cs, Please create it first.");
+						_displays = new string[1] { "Not found Lid.cs, Please create it first." };
+						return;
 					}
 				}
 				// Debug.Log(type);
@@ -162,7 +163,6 @@ namespace Emptybraces.Localization.Editor
 			catch (Exception e)
 			{
 				Debug.LogError(e.Message);
-				_displays = new string[1] { "Exception orrured, see console." };
 			}
 		}
 	}

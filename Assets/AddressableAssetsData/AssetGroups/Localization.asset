@@ -15,8 +15,15 @@ MonoBehaviour:
   m_GroupName: Localization
   m_Data:
     m_SerializedData: []
-  m_GUID: a0ad6d69d0f2cd44296707a37fe06ef2
+  m_GUID: 2efc325abf5dc5c4eae87bb82b0eb254
   m_SerializeEntries:
+  - m_GUID: a77fdfc76a687ae42a60c53bd221295e
+    m_Address: ZCOOLKuaiLe-Regular SDF
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - localization_sc
+    - localization_tc
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4b1dd579d9f490142b422edb04ff50cc
     m_Address: NotoSerifJP-Regular SDF
     m_ReadOnly: 0
@@ -34,6 +41,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - localization_sc
+    - localization_tc
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 711e30ee8eee5d34ebdd61a4ba1a8e62
     m_Address: NotoSansJP-Regular SDF
@@ -47,11 +55,10 @@ MonoBehaviour:
     m_SerializedLabels:
     - localization_en
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a77fdfc76a687ae42a60c53bd221295e
-    m_Address: ZCOOLKuaiLe-Regular SDF
+  - m_GUID: 44574fda29975bc42b2f1dde928367bd
+    m_Address: LocalizationSettings
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - localization_sc
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8baa4fcd78933614095db9c82786d5c3, type: 2}

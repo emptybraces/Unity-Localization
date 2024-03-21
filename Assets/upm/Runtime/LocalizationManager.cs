@@ -12,39 +12,44 @@ namespace Emptybraces.Localization
 		public const string k_AddressablesLabelPrefix = "localization_";
 		public const string k_SettingsFileName = "LocalizationSettings";
 		public static SystemLanguage CurrentLoadedLaunguage = SystemLanguage.Unknown;
-		static Dictionary<int, AsyncOperationHandle<TMP_FontAsset>> _cacheAASHandles = new();
+		static Dictionary<string, AsyncOperationHandle<TMP_FontAsset>> _cacheAASHandles = new();
 
-		public static TMP_FontAsset LoadFontAssetIfNeeded(TMP_FontAsset fontAsset, SystemLanguage? language = null)
+		public static TMP_FontAsset LoadFontAssetIfNeeded(TMP_FontAsset hasSetFontAssetOnInspector, SystemLanguage? language = null)
 		{
-			if (_cacheAASHandles.TryGetValue(fontAsset.GetInstanceID(), out var op))
+			var cached_key = hasSetFontAssetOnInspector.name;
+			if (_cacheAASHandles.TryGetValue(cached_key, out var op))
 				return op.Status == AsyncOperationStatus.Succeeded ? op.Result : null;
 			language ??= CurrentLoadedLaunguage;
 			var lan_idx = Settings.Instance.GetIndex(language.Value);
-			Assert.IsFalse(lan_idx == -1, $"{language.Value} is not supported: ");
+			Assert.IsFalse(lan_idx == -1, $"[LocalizationManager] {language.Value} is not supported: ");
 			if (Settings.Instance.EnableDebugLog)
-				Debug.Log($"Load to cache: {fontAsset} of {language}");
+				Debug.Log($"[LocalizationManager] Load to cache: {hasSetFontAssetOnInspector} of {language}");
 			// var handle = Addressables.LoadAssetsAsync<TMP_FontAsset>((IEnumerable)new object[] { fontName, k_AddressablesLabelPrefix + lanId }, null, Addressables.MergeMode.Intersection);
-			AsyncOperationHandle<TMP_FontAsset> handle;
 			for (int i = 0; i < Settings.Instance.SupportLanguageFontAssets.Length; i++)
 			{
 				var item = Settings.Instance.SupportLanguageFontAssets[i];
-				if (item.BaseFontAsset == fontAsset)
+				if (item.BaseFontAsset == null)
+					continue;
+				// シーン内から参照しているフォントアセットと、Addressablesプレハブ内で参照しているフォントアセットは違うので、nameで一致検出
+				if (item.BaseFontAsset.name == hasSetFontAssetOnInspector.name)
 				{
-					// nullがセットされていたら
+					// ActualFontAssetにnullがセットされていない場合のみ
 					if (item.ActualFontAssetRefs[lan_idx].RuntimeKeyIsValid())
 					{
-						handle = item.ActualFontAssetRefs[lan_idx].LoadAssetAsync<TMP_FontAsset>();
-						_cacheAASHandles[fontAsset.GetInstanceID()] = handle;
+						if (Settings.Instance.EnableDebugLog)
+							Debug.Log($"[LocalizationManager] Try load TMP_FontAsset. {language.Value}");
+						var handle = item.ActualFontAssetRefs[lan_idx].LoadAssetAsync<TMP_FontAsset>();
+						_cacheAASHandles[cached_key] = handle;
 						handle.WaitForCompletion();
 						if (Settings.Instance.EnableDebugLog)
-							Debug.Log($"{lan_idx}, {handle.Result}");
+							Debug.Log($"[LocalizationManager] Load complete TMP_FontAsset. {language.Value}, {handle.Result}, cache key: {cached_key}");
 						return handle.Status == AsyncOperationStatus.Succeeded ? handle.Result : null;
 					}
 					return null;
 				}
 			}
 			if (Settings.Instance.EnableDebugLog)
-				Debug.LogError($"Failed to Load: {fontAsset} of {language}");
+				Debug.LogError($"[LocalizationManager] Failed to Load: {hasSetFontAssetOnInspector} of {language}");
 			return null;
 		}
 
@@ -57,7 +62,7 @@ namespace Emptybraces.Localization
 			}
 			_cacheAASHandles.Clear();
 		}
-		
+
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
 		static void _DomainReset()
 		{

@@ -15,7 +15,7 @@ namespace Emptybraces.Localization
 			if (LocalizationManager.CurrentLoadedLaunguage == language)
 				return true;
 			var lan_prefix = Settings.Instance.GetPrefix(language);
-			Assert.IsNotNull(lan_prefix, "unsupported language: " + language);
+			Assert.IsNotNull(lan_prefix, "[LocalizationManager] unsupported language: " + language);
 			var path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_prefix}_word.txt");
 			var is_success = LoadFromFile(path);
 			if (!is_success)
@@ -23,13 +23,13 @@ namespace Emptybraces.Localization
 				if (Application.systemLanguage != language)
 				{
 					lan_prefix = Settings.Instance.GetPrefix(Application.systemLanguage);
-					Debug.LogWarning($"Failed to load {path}, retry with OS language. {lan_prefix}");
+					Debug.LogWarning($"[LocalizationManager] Failed to load {path}, retry with OS language. {lan_prefix}");
 					path = Path.Combine(Settings.Instance.LocalizeFileLocation, $"{lan_prefix}_word.txt");
 					is_success = LoadFromFile(path);
 				}
 				if (!is_success)
 				{
-					Debug.LogError($"Failed to load {path}.");
+					Debug.LogError($"[LocalizationManager] Failed to load {path}.");
 					return false;
 				}
 			}
@@ -55,17 +55,17 @@ namespace Emptybraces.Localization
 			{
 				if (!File.Exists(path))
 				{
-					Debug.LogError($"File not found. path is {path}");
+					Debug.LogError($"[LocalizationManager] File not found. path is {path}");
 					return false;
 				}
 				var text = File.ReadAllText(path, System.Text.Encoding.UTF8);
 				Load(text);
-				Debug.Log($"Complete load. {path}");
+				Debug.Log($"[LocalizationManager] Complete load. {path}");
 			}
 			catch (Exception e)
 			{
 				// Dialogue.Confirm1("Fatal", "Exception occured please check the log file.").Forget();
-				Debug.LogError($"Exception: {e.Message}");
+				Debug.LogError($"[LocalizationManager] Exception: {e.Message}");
 				return false;
 			}
 			return true;
@@ -75,7 +75,7 @@ namespace Emptybraces.Localization
 		{
 			if (string.IsNullOrEmpty(textData))
 			{
-				Debug.LogError("Text data is empty.");
+				Debug.LogError("[LocalizationManager] Text data is empty.");
 				return false;
 			}
 			Data ??= new(256);
@@ -136,7 +136,7 @@ namespace Emptybraces.Localization
 					}
 					// 格納
 					if (Settings.Instance.EnableDebugLog)
-						Debug.Log($"Add | K={last_key}, V={value}");
+						Debug.Log($"[LocalizationManager] Add | K={last_key}, V={value}");
 					Data.Add(last_key, value);
 				}
 			}
@@ -151,7 +151,7 @@ namespace Emptybraces.Localization
 				values.Insert(0, (string)Data[lastKey]); // 先頭のキーを配列の先頭に設定する。
 				Data[lastKey] = values.ToArray(); // 上書きする。
 				if (Settings.Instance.EnableDebugLog)
-					Debug.Log($"AddArray | K={lastKey}, V={string.Join(",", values)}");
+					Debug.Log($"[LocalizationManager] AddArray | K={lastKey}, V={string.Join(",", values)}");
 				values.Clear();
 			}
 		}

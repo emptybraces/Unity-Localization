@@ -30,7 +30,7 @@ namespace Emptybraces.Localization.Editor
 			}
 			if (AddressableAssetSettingsDefaultObject.Settings == null)
 			{
-				EditorGUILayout.HelpBox("Need Addressable settings .", MessageType.Error);
+				EditorGUILayout.HelpBox("Need Addressable settings.", MessageType.Error);
 				GUI.enabled = false;
 			}
 			if (GUILayout.Button("Register above FontAsset to Addressables"))
@@ -38,16 +38,25 @@ namespace Emptybraces.Localization.Editor
 				var aas_settings = AddressableAssetSettingsDefaultObject.Settings;
 				// 最初に全てのアドレスを消す
 				var group = aas_settings.FindGroup(LocalizationManager.k_AddressablesGroupName);
-				if (group)
+				if (group != null)
 				{
 					foreach (var i in group.entries.ToArray())
 					{
 						group.RemoveAssetEntry(i);
 					}
 				}
+				// SettingsのAddressablesへの登録処理をここでも読んでおく。
+				Menu.MakeSettingsAssetIfNeeded();
+				// ベースフォント用のラベルを作成
 				// Addresasblesの登録と、ActualFontAssetRefsを埋める
 				foreach (var item in settings.SupportLanguageFontAssets)
 				{
+					// ベースフォントのアドレス登録
+					// Settingsを登録するようにしたので、参照から含まれるようになるので必要なし。
+					// var entry = item.BaseFontAsset.SetAddressableGroup(LocalizationManager.k_AddressablesGroupName);
+					// var label = LocalizationManager.k_AddressablesLabelPrefix + "basefont";
+					// aas_settings.AddLabel(label);
+					// entry.SetLabel(label, true);
 					for (int i = 0; i < item.ActualFontAssets.Length; ++i)
 					{
 						var j = item.ActualFontAssets[i];
