@@ -1,5 +1,7 @@
 using Emptybraces.Localization;
+using Emptybraces.Localization.Editor;
 using TMPro;
+using UnityEditor.AddressableAssets;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
@@ -14,7 +16,7 @@ namespace Emptybraces
 		void Awake()
 		{
 			Word.LoadWordFile(SystemLanguage.English);
-			
+
 			_aRefDynamicTexts.InstantiateAsync(transform).Completed += handle =>
 			{
 				Debug.Log("Loaded DynamicTexts");
@@ -45,6 +47,17 @@ namespace Emptybraces
 						});
 					}
 				});
+			}
+		}
+
+		void OnValidate()
+		{
+			if (Application.isPlaying || AddressableAssetSettingsDefaultObject.Settings == null)
+				return;
+			if (_aRefDynamicTexts.editorAsset != null && !_aRefDynamicTexts.editorAsset.AddressableResourceExists())
+			{
+				_aRefDynamicTexts.editorAsset.AddressableAddToGroup(AddressableAssetSettingsDefaultObject.Settings.DefaultGroup.Name);
+				Debug.Log("Add _aRefDynamicTexts to Addressables.");
 			}
 		}
 
