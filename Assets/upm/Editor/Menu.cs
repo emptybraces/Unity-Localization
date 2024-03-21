@@ -18,7 +18,7 @@ namespace Emptybraces.Localization.Editor
 				asset = ScriptableObject.CreateInstance<Settings>();
 				AssetDatabase.CreateAsset(asset, $"Assets/{LocalizationManager.k_SettingsFileName}.asset");
 			}
-			var entry = asset.SetAddressableGroup(LocalizationManager.k_AddressablesGroupName);
+			var entry = asset.AddressableAddToGroup(LocalizationManager.k_AddressablesGroupName);
 			entry.SetAddress(asset.name);
 			AssetDatabase.Refresh();
 			EditorGUIUtility.PingObject(asset);

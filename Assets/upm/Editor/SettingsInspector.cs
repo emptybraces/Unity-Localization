@@ -64,7 +64,7 @@ namespace Emptybraces.Localization.Editor
 						item.ActualFontAssetRefs[i].SetEditorAsset(j);
 						if (j != null)
 						{
-							var entry = j.SetAddressableGroup(LocalizationManager.k_AddressablesGroupName);
+							var entry = j.AddressableAddToGroup(LocalizationManager.k_AddressablesGroupName);
 							entry.SetAddress(j.name);
 							// bundletypeでラベルごとにまとめるので必要
 							var label = LocalizationManager.k_AddressablesLabelPrefix + settings.SupportLanguages[i].Prefix;

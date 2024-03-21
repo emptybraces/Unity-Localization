@@ -11,7 +11,7 @@ namespace Emptybraces.Localization.Editor
 	public static class Extensions
 	{
 		// https://forum.unity.com/threads/set-addressable-via-c.671938/#post-6819911
-		public static AddressableAssetEntry SetAddressableGroup(this Object obj, string groupName)
+		public static AddressableAssetEntry AddressableAddToGroup(this Object asset, string groupName)
 		{
 			var settings = AddressableAssetSettingsDefaultObject.Settings;
 			if (settings)
@@ -20,7 +20,7 @@ namespace Emptybraces.Localization.Editor
 				if (!group)
 					group = settings.CreateGroup(groupName, false, false, true, null, typeof(ContentUpdateGroupSchema), typeof(BundledAssetGroupSchema));
 
-				var assetpath = AssetDatabase.GetAssetPath(obj);
+				var assetpath = AssetDatabase.GetAssetPath(asset);
 				var guid = AssetDatabase.AssetPathToGUID(assetpath);
 
 				var e = settings.CreateOrMoveEntry(guid, group, false, false);
@@ -31,6 +31,19 @@ namespace Emptybraces.Localization.Editor
 				return e;
 			}
 			return null;
+		}
+
+		public static bool AddressableResourceExists(this Object asset)
+		{
+			foreach (var i in AddressableAssetSettingsDefaultObject.Settings.groups)
+			{
+				foreach (var j in i.entries)
+				{
+					if (j.MainAsset == asset)
+						return true;
+				}
+			}
+			return false;
 		}
 
 		public static T[] FindObjectsByType<T>(FindObjectsInactive findObjectsInactive = FindObjectsInactive.Exclude, FindObjectsSortMode findObjectsSortMode = FindObjectsSortMode.None) where T : Component
