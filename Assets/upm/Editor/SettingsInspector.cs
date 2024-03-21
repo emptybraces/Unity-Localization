@@ -52,11 +52,7 @@ namespace Emptybraces.Localization.Editor
 				foreach (var item in settings.SupportLanguageFontAssets)
 				{
 					// ベースフォントのアドレス登録
-					// Settingsを登録するようにしたので、参照から含まれるようになるので必要なし。
-					// var entry = item.BaseFontAsset.SetAddressableGroup(LocalizationManager.k_AddressablesGroupName);
-					// var label = LocalizationManager.k_AddressablesLabelPrefix + "basefont";
-					// aas_settings.AddLabel(label);
-					// entry.SetLabel(label, true);
+					var entry = item.BaseFontAsset.AddressableAddToGroup(LocalizationManager.k_AddressablesGroupName);
 					for (int i = 0; i < item.ActualFontAssets.Length; ++i)
 					{
 						var j = item.ActualFontAssets[i];
@@ -64,7 +60,7 @@ namespace Emptybraces.Localization.Editor
 						item.ActualFontAssetRefs[i].SetEditorAsset(j);
 						if (j != null)
 						{
-							var entry = j.AddressableAddToGroup(LocalizationManager.k_AddressablesGroupName);
+							entry = j.AddressableAddToGroup(LocalizationManager.k_AddressablesGroupName);
 							entry.SetAddress(j.name);
 							// bundletypeでラベルごとにまとめるので必要
 							var label = LocalizationManager.k_AddressablesLabelPrefix + settings.SupportLanguages[i].Prefix;

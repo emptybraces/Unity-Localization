@@ -1,7 +1,5 @@
 using Emptybraces.Localization;
-using Emptybraces.Localization.Editor;
 using TMPro;
-using UnityEditor.AddressableAssets;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
@@ -10,7 +8,7 @@ namespace Emptybraces
 	public class Sample : MonoBehaviour
 	{
 		[SerializeField] Toggle[] _languageToggles;
-		[SerializeField] AssetReference _aRefDynamicTexts;
+		public AssetReference _aRefDynamicTexts;
 		[SerializeField] string _version = "1.0.0";
 		GameObject _dynText;
 		void Awake()
@@ -47,17 +45,6 @@ namespace Emptybraces
 						});
 					}
 				});
-			}
-		}
-
-		void OnValidate()
-		{
-			if (Application.isPlaying || AddressableAssetSettingsDefaultObject.Settings == null)
-				return;
-			if (_aRefDynamicTexts.editorAsset != null && !_aRefDynamicTexts.editorAsset.AddressableResourceExists())
-			{
-				_aRefDynamicTexts.editorAsset.AddressableAddToGroup(AddressableAssetSettingsDefaultObject.Settings.DefaultGroup.Name);
-				Debug.Log("Add _aRefDynamicTexts to Addressables.");
 			}
 		}
 
