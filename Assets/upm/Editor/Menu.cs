@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -104,6 +105,33 @@ namespace Emptybraces.Localization.Editor
 			}
 			if (!is_detect)
 				Debug.Log("[LocalizationManager] Nothing Detects.");
+			Debug.Log("[LocalizationManager] Finish");
+		}
+		[MenuItem(k_MenuPath + "/Outputs FaceInfo settings for TMP_FontAsset being used.")]
+		public static void _OutputsFaceInfoSettings()
+		{
+			Debug.Log("[LocalizationManager] Start");
+			var set = new HashSet<TMPro.TMP_FontAsset>();
+			foreach (var i in Settings.Instance.SupportLanguageFontAssets)
+			{
+				if (i.BaseFontAsset != null)
+					set.Add(i.BaseFontAsset);
+				foreach (var j in i.ActualFontAssets)
+					if (j != null)
+						set.Add(j);
+			}
+			var sb = new StringBuilder();
+			foreach (var i in set)
+			{
+				sb.AppendLine(i.name);
+				var param = JsonUtility.ToJson(i.faceInfo);
+				param = param.Replace("\"", "");
+				param = param.Replace(",", Environment.NewLine);
+				sb.AppendLine(param);
+			}
+			var path = $"{Directory.GetParent(Application.dataPath)}/{DateTime.Now:yyyyMMdd_HHmmss}.txt";
+			File.WriteAllText(path, sb.ToString());
+			Debug.Log("[LocalizationManager] output file: " + path);
 			Debug.Log("[LocalizationManager] Finish");
 		}
 

@@ -40,11 +40,7 @@ namespace Emptybraces.Localization
 			{
 				foreach (var i in Settings.Instance.SupportLanguageFontAssets)
 				{
-					var font = i.BaseFontAsset;
-					if (font.fallbackFontAssetTable.Count == 0)
-						font.fallbackFontAssetTable.Add(LocalizationManager.LoadFontAssetIfNeeded(font));
-					else
-						font.fallbackFontAssetTable[0] = LocalizationManager.LoadFontAssetIfNeeded(font);
+					LocalizationManager.AddFallbackFont(i.BaseFontAsset);
 				}
 			}
 			return true;

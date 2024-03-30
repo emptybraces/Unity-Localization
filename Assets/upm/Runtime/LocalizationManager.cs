@@ -63,6 +63,21 @@ namespace Emptybraces.Localization
 			_cacheAASHandles.Clear();
 		}
 
+		internal static void AddFallbackFont(TMP_FontAsset font)
+		{
+			if (font.fallbackFontAssetTable.Count == 0)
+				font.fallbackFontAssetTable.Add(LoadFontAssetIfNeeded(font));
+			else
+				font.fallbackFontAssetTable[0] = LoadFontAssetIfNeeded(font);
+			if (font.fallbackFontAssetTable[0] != null)
+			{
+				var baseinfo = font.faceInfo;
+				var fallback_info = font.fallbackFontAssetTable[0].faceInfo;
+				baseinfo.lineHeight = fallback_info.lineHeight;
+				font.faceInfo = baseinfo;
+			}
+			font.ReadFontAssetDefinition();
+		}
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
 		static void _DomainReset()
 		{

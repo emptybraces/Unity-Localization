@@ -26,7 +26,6 @@ namespace Emptybraces.Localization
 					Debug.Log($"[LocalizationManager] Clear font fallback list. {font}");
 					font.fallbackFontAssetTable.Clear();
 				};
-
 			}
 #endif
 			if (!_isRegisterQuitting)
@@ -42,15 +41,7 @@ namespace Emptybraces.Localization
 		public void RefreshText()
 		{
 			var tm = GetComponent<TMPro.TMP_Text>();
-			if (tm.font.fallbackFontAssetTable.Count == 0)
-			{
-				tm.font.fallbackFontAssetTable.Add(LocalizationManager.LoadFontAssetIfNeeded(tm.font));
-			}
-			else
-			{
-				tm.font.fallbackFontAssetTable[0] = LocalizationManager.LoadFontAssetIfNeeded(tm.font);
-			}
-			tm.font.ReadFontAssetDefinition();
+			LocalizationManager.AddFallbackFont(tm.font);
 			if (_dynamicMessage != null)
 			{
 				tm.text = _dynamicMessage();
@@ -74,6 +65,7 @@ namespace Emptybraces.Localization
 				tm.text = cb();
 			}
 		}
+
 #if UNITY_EDITOR
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
 		static void _DomainReset()
