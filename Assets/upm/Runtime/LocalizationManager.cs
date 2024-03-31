@@ -63,7 +63,7 @@ namespace Emptybraces.Localization
 			_cacheAASHandles.Clear();
 		}
 
-		internal static void AddFallbackFont(TMP_FontAsset font)
+		public static void AddFallbackFont(TMP_FontAsset font)
 		{
 			if (font.fallbackFontAssetTable.Count == 0)
 				font.fallbackFontAssetTable.Add(LoadFontAssetIfNeeded(font));
