@@ -74,6 +74,15 @@ namespace Emptybraces.Localization
 				var baseinfo = font.faceInfo;
 				var fallback_info = font.fallbackFontAssetTable[0].faceInfo;
 				baseinfo.lineHeight = fallback_info.lineHeight;
+				baseinfo.underlineOffset = fallback_info.underlineOffset;
+				baseinfo.underlineThickness = fallback_info.underlineThickness;
+				baseinfo.strikethroughOffset = fallback_info.strikethroughOffset;
+				baseinfo.strikethroughThickness = fallback_info.strikethroughThickness;
+				baseinfo.superscriptOffset = fallback_info.superscriptOffset;
+				baseinfo.superscriptSize = fallback_info.superscriptSize;
+				baseinfo.subscriptOffset = fallback_info.subscriptOffset;
+				baseinfo.subscriptSize = fallback_info.subscriptSize;
+				baseinfo.tabWidth = fallback_info.tabWidth;
 				font.faceInfo = baseinfo;
 			}
 			font.ReadFontAssetDefinition();
