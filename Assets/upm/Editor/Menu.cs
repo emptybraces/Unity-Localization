@@ -123,13 +123,14 @@ namespace Emptybraces.Localization.Editor
 			var sb = new StringBuilder();
 			foreach (var i in set)
 			{
+				sb.AppendLine("--------------------------------------------");
 				sb.AppendLine(i.name);
 				var param = JsonUtility.ToJson(i.faceInfo);
 				param = param.Replace("\"", "");
 				param = param.Replace(",", Environment.NewLine);
 				sb.AppendLine(param);
 			}
-			var path = $"{Directory.GetParent(Application.dataPath)}/{DateTime.Now:yyyyMMdd_HHmmss}.txt";
+			var path = $"{Directory.GetParent(Application.dataPath)}/output_faceinfo_{DateTime.Now:yyyyMMdd_HHmmss}.txt";
 			File.WriteAllText(path, sb.ToString());
 			Debug.Log("[LocalizationManager] output file: " + path);
 			Debug.Log("[LocalizationManager] Finish");
