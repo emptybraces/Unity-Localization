@@ -140,22 +140,25 @@ namespace Emptybraces.Localization.Editor
 		{
 			static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 			{
+				if (Settings.Instance == null)
+					return;
+				string filename = "";
+				foreach (var i in Settings.Instance.SupportLanguages)
+				{
+					if (Settings.Instance.DefaultLanguage == i.Language)
+					{
+						filename = $"{i.Prefix}_word.txt";
+						break;
+					}
+				}
+				if (filename == "")
+					return;
 				foreach (var i in importedAssets)
 				{
-					if (Settings.Instance != null)
+					if (i.EndsWith(filename, StringComparison.Ordinal))
 					{
-						foreach (var j in Settings.Instance.SupportLanguages)
-						{
-							if (i.EndsWith($"{j.Prefix}_word.txt", StringComparison.Ordinal))
-							{
-								CreateLID();
-								break;
-							}
-						}
-					}
-					else
-					{
-						break;
+						CreateLID();
+						return;
 					}
 				}
 			}
