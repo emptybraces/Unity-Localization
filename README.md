@@ -1,4 +1,4 @@
-# Unity_Localization
+# Unity Localization
 A text based localization system.
 Words are displayed on the TMP_Text from a word list defined in a text file prepared for each language in StreamingAssets, and can switched as needed regardless of Editor or Runtime.
 
