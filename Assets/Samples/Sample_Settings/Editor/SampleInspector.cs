@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Emptybraces.Localization.Editor
 {
 	[CustomEditor(typeof(Sample))]
-	public class SampleInspector : UnityEditor.Editor
+	internal class SampleInspector : UnityEditor.Editor
 	{
 		public override void OnInspectorGUI()
 		{

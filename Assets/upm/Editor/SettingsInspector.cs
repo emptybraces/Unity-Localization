@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Emptybraces.Localization.Editor
 {
 	[CustomEditor(typeof(Settings))]
-	public class SettingsInspector : UnityEditor.Editor
+	internal class SettingsInspector : UnityEditor.Editor
 	{
 		public override void OnInspectorGUI()
 		{

@@ -8,7 +8,7 @@ using UnityEditor.Search;
 using UnityEngine;
 namespace Emptybraces.Localization.Editor
 {
-	public static class Menu
+	internal static class Menu
 	{
 		const string k_MenuPath = "Assets/Localization";
 		[MenuItem(k_MenuPath + "/Create Localization Settings")]
@@ -136,7 +136,7 @@ namespace Emptybraces.Localization.Editor
 			Debug.Log("[LocalizationManager] Finish");
 		}
 
-		public class Importer : AssetPostprocessor
+		internal class Importer : AssetPostprocessor
 		{
 			static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 			{

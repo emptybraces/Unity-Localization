@@ -2,7 +2,7 @@
   "name": "com.emptybraces.localization",
   "displayName": "Localization",
   "author": "emptybraces",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "unity": "2023.2",
   "description": "Text based localization system.",
   "keywords": ["unity, localization"],

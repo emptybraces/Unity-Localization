@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Emptybraces.Localization.Editor
 {
 	[CustomEditor(typeof(TMProLocalize))]
-	public class TMProLocalizeInspector : UnityEditor.Editor
+	internal class TMProLocalizeInspector : UnityEditor.Editor
 	{
 		SerializedProperty _key;
 		static SystemLanguage _language = SystemLanguage.English;
