@@ -14,6 +14,7 @@ namespace Emptybraces.Localization.Editor
 		{
 			GUI.enabled = false;
 			EditorGUI.PropertyField(_position, _property, _label);
+			GUI.enabled = true;
 		}
 	}
 	[CustomPropertyDrawer(typeof(SupportLanguagePopupAttribute))]
